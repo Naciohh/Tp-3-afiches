@@ -1,6 +1,6 @@
-import blanco from '../../assets/iconos/spinner-blanco.svg';
-import oscuro from '../../assets/iconos/spinner-oscuro.svg';
+import spinner from '../../assets/iconos/spinner.png';
 
-export function Spinner({ color = 'Blanco' }: { color?: 'Blanco' | 'Oscuro' }) {
-  return <img className="c-spinner" src={color === 'Oscuro' ? oscuro : blanco} width={16} height={16} alt="" />;
+// Spinner de carga: anillo con cola que se desvanece, y gira sin parar (ver .c-spinner en atomos.css).
+export function Spinner() {
+  return <img className="c-spinner" src={spinner} width={20} height={20} alt="" />;
 }
