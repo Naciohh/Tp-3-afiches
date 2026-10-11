@@ -1,0 +1,71 @@
+/* Variables y estilos de texto tomados del archivo "Design system - Afiches" de Figma.
+   Si cambia algo en Figma (colecciones Colores y Medidas, estilos de texto), se cambia acá. */
+:root {
+  /* Colores */
+  --color-texto: #0a0a0a;
+  --color-primario: #1b3b6f;
+  --color-acento: #f0750c;
+  --color-salmon: #ff6e6e;
+  --color-fondo: #f4f4f9;
+  --color-fondo-chat: #dbe2ed;
+  --color-blanco: #ffffff;
+  --color-texto-secundario: #5c5c5c;
+  --color-salmon-sutil: #ffd9d9;
+  --color-linea-suave: #c9c9d1;
+  --color-rayado-claro: #e4e8ef;
+  --color-rayado-oscuro: #d3dae6;
+  --color-negro-video: #000000;
+  --color-gris-camara: #999999;
+  --color-subtitulo-fondo: rgba(0, 0, 0, 0.78);
+  --color-error: #c0392b;
+
+  /* Espacios */
+  --espacio-2: 2px;
+  --espacio-4: 4px;
+  --espacio-6: 6px;
+  --espacio-8: 8px;
+  --espacio-10: 10px;
+  --espacio-12: 12px;
+  --espacio-14: 14px;
+  --espacio-16: 16px;
+  --espacio-18: 18px;
+  --espacio-20: 20px;
+  --espacio-24: 24px;
+  --espacio-26: 26px;
+  --espacio-28: 28px;
+  --espacio-32: 32px;
+  --espacio-56: 56px;
+  --espacio-64: 64px;
+  --espacio-72: 72px;
+  --espacio-80: 80px;
+
+  /* Radios y bordes */
+  --radio-4: 4px;
+  --radio-5: 5px;
+  --radio-6: 6px;
+  --radio-8: 8px;
+  --borde-1: 1px;
+  --borde-1_5: 1.5px;
+  --borde-2: 2px;
+  --borde-3: 3px;
+
+  /* Familias */
+  --fuente-display: 'Archivo Black', sans-serif;
+  --fuente-cuerpo: 'Inter', sans-serif;
+  --fuente-datos: 'IBM Plex Mono', monospace;
+}
+
+/* Estilos de texto (nombres de Figma) */
+.t-display-40 { font: 400 40px/40px var(--fuente-display); }
+.t-display-28 { font: 400 28px/30px var(--fuente-display); }
+.t-display-20 { font: 400 20px/24px var(--fuente-display); }
+.t-display-16 { font: 400 16px/20px var(--fuente-display); }
+.t-display-16-espaciado { font: 400 16px/20px var(--fuente-display); letter-spacing: 0.03em; }
+.t-cuerpo-bold-17 { font: 700 17px/22px var(--fuente-cuerpo); }
+.t-cuerpo-semibold-16 { font: 600 16px/20px var(--fuente-cuerpo); }
+.t-cuerpo-regular-16 { font: 400 16px/24px var(--fuente-cuerpo); }
+.t-cuerpo-regular-14 { font: 400 14px/20px var(--fuente-cuerpo); }
+.t-cuerpo-bold-14 { font: 700 14px/20px var(--fuente-cuerpo); }
+.t-datos-medium-13 { font: 500 13px/18px var(--fuente-datos); }
+.t-datos-medium-13-espaciado { font: 500 13px/18px var(--fuente-datos); letter-spacing: 0.08em; }
+.t-datos-regular-12 { font: 400 12px/16px var(--fuente-datos); }

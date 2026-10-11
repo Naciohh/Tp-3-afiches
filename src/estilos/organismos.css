@@ -1,0 +1,38 @@
+/* Organismos */
+.c-cabecera { display: flex; flex-direction: column; gap: var(--espacio-8); width: 100%; }
+.c-cabecera__fila { display: flex; align-items: flex-end; justify-content: space-between; }
+.c-cabecera__contador { color: var(--color-primario); }
+.c-cabecera__nota { color: var(--color-texto-secundario); }
+
+.c-recorrido { position: relative; display: flex; flex-direction: column; gap: var(--espacio-12); width: 100%; padding-left: var(--espacio-26); }
+.c-recorrido__item { position: relative; }
+.c-recorrido__item > .c-punto { position: absolute; left: calc(-1 * var(--espacio-26)); top: 50%; margin-top: -8px; z-index: 1; }
+.c-recorrido__linea { position: absolute; left: 7px; width: 2px; background: var(--color-texto); }
+
+.c-evento-linea { position: relative; width: 100%; padding-left: var(--espacio-26); }
+.c-evento-linea > .c-punto { position: absolute; left: 0; top: 28px; }
+
+.c-panel {
+  position: relative; display: flex; flex-direction: column; gap: var(--espacio-12); width: 100%; overflow: hidden;
+  padding: var(--espacio-16); background: var(--color-blanco);
+  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+}
+.c-panel--bloqueado { background: var(--color-rayado-claro); }
+.c-panel > :not(.c-rayado) { position: relative; }
+.c-panel__etiqueta { color: var(--color-primario); }
+.c-panel__candado { color: var(--color-texto-secundario); }
+.c-panel__redes { display: flex; flex-direction: column; gap: var(--espacio-8); }
+.c-panel__redes > p { color: var(--color-texto-secundario); }
+.c-panel__chips { display: flex; flex-wrap: wrap; gap: var(--espacio-8); }
+
+.c-cierre {
+  display: flex; flex-direction: column; gap: var(--espacio-8); width: 100%;
+  padding: var(--espacio-18); background: var(--color-primario); color: var(--color-blanco);
+  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+}
+
+.c-guia { width: 100%; border-top: var(--borde-2) solid var(--color-texto); }
+
+.c-original { display: flex; flex-direction: column; gap: var(--espacio-8); width: 100%; padding: var(--espacio-14) 0 var(--espacio-16); border-top: var(--borde-2) solid var(--color-texto); }
+.c-original__video { display: block; width: 100%; height: 192px; background: var(--color-negro-video); border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-4); }
+.c-original__fuente { color: var(--color-texto-secundario); }

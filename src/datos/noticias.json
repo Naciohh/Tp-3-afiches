@@ -1,0 +1,223 @@
+{
+  "eventUrl": "TODO_URL_DEL_EVENTO_TP4",
+  "evento": {
+    "_nota": "DATOS PROVISORIOS inventados para probar el diseño. Confirmar fecha, hora, nombre, redes y formulario antes de publicar.",
+    "nombre": "Así te engañan: la muestra",
+    "descripcion": "Una muestra para ver cómo se construyeron las noticias falsas que marcaron a tres generaciones, y para aprender a no caer en la próxima.",
+    "fecha": "Sábado 21 de noviembre de 2026",
+    "hora": "18 h",
+    "lugar": "Palacio Libertad, Domingo F. Sarmiento",
+    "direccion": "Sarmiento 151, Ciudad de Buenos Aires",
+    "mapaUrl": "https://www.google.com/maps/search/?api=1&query=Palacio+Libertad+Sarmiento+151+Buenos+Aires",
+    "redes": [
+      {
+        "nombre": "Instagram",
+        "url": "TODO"
+      },
+      {
+        "nombre": "TikTok",
+        "url": "TODO"
+      }
+    ],
+    "newsletter": {
+      "simulado": true,
+      "texto": "¿No llegás al evento? Dejá tu mail y te mandamos un resumen y la info cuando termine.",
+      "url": "TODO link al formulario (Google Forms, Mailchimp u otro)"
+    }
+  },
+  "epocas": [
+    "Abuelos",
+    "Padres",
+    "Vos"
+  ],
+  "ar": {
+    "anchoTele": 0.6,
+    "filterMinCF": 0.001,
+    "filterBeta": 20,
+    "missTolerance": 8,
+    "warmupTolerance": 5,
+    "crt": true,
+    "subtitulos": true
+  },
+  "noticias": [
+    {
+      "id": "kennedy",
+      "nombre": "Kennedy",
+      "epoca": "Abuelos",
+      "anio": "1963",
+      "titulo": "El asesinato de Kennedy",
+      "tecnica": "Falsa autoridad",
+      "ficha": "Usa un presentador real, el logo de un canal real y una grabación auténtica, pero le cambia el audio. Cuando la cara y la voz parecen de confianza, cuesta dudar de lo que se dice.",
+      "falso": "Que la CIA mató al presidente Kennedy por oponerse a la industria militar.",
+      "real": "El 22 de noviembre de 1963, John F. Kennedy fue asesinado en Dallas, Texas. El periodista Walter Cronkite dio la noticia en vivo por la cadena CBS: anunció que el presidente había muerto y que el vicepresidente Lyndon B. Johnson iba a asumir. La investigación oficial (la Comisión Warren, 1964) concluyó que el tirador fue Lee Harvey Oswald. El caso generó muchísimas teorías conspirativas, pero ninguna investigación probó que la CIA lo haya matado.",
+      "tip": "Que lo diga una cara conocida no lo hace cierto: la imagen y la voz se pueden editar por separado. Buscá la grabación completa en un archivo confiable y compará.",
+      "videoOriginal": "videos/originales/kennedy.mp4",
+      "subtitulosOriginal": "subs/originales/kennedy.vtt",
+      "fuenteOriginal": "CBS News, 22 de noviembre de 1963. Walter Cronkite anuncia la muerte de Kennedy en vivo (fragmento retransmitido por CBS en 2013, Internet Archive).",
+      "notaOriginal": "Este es el anuncio real. Fijate que Cronkite no dice nada de la CIA: solo informa la muerte y quién asume.",
+      "modelo": "models/kennedy.glb",
+      "video": "videos/kennedy.mp4",
+      "subtitulos": "subs/kennedy.vtt",
+      "uvRepeat": [
+        1,
+        1
+      ],
+      "uvOffset": [
+        0,
+        0
+      ],
+      "aspectoPantalla": 1.447,
+      "targets": [
+        0,
+        4
+      ],
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      }
+    },
+    {
+      "id": "chernobil",
+      "nombre": "Chernobil",
+      "epoca": "Padres",
+      "anio": "1986",
+      "titulo": "El accidente de Chernobil",
+      "tecnica": "Fuente anónima",
+      "ficha": "Se apoya en una fuente sin nombre (\"agencias de seguridad\") que nadie puede chequear. Suena a secreto revelado, y eso la hace parecer más creíble, no menos.",
+      "falso": "Que \"agencias de seguridad\" informaron que la explosión fue un sabotaje extranjero para destruir la economía del país.",
+      "real": "El 26 de abril de 1986 explotó el reactor 4 de la central nuclear de Chernóbil, en la actual Ucrania, que entonces era parte de la Unión Soviética. Fue un accidente: una prueba de seguridad mal hecha sobre un reactor con fallas de diseño. El gobierno soviético tardó dos días en reconocerlo y al principio dio muy poca información. No hubo ningún sabotaje.",
+      "tip": "Cuando una noticia dice \"fuentes de seguridad\", \"informes\" o \"se supo\" sin decir quién, preguntate por qué esa fuente no da la cara. Sin una fuente que se pueda verificar, es un rumor.",
+      "videoOriginal": "videos/originales/chernobil.mp4",
+      "subtitulosOriginal": "subs/originales/chernobil.vtt",
+      "fuenteOriginal": "Noticiero Vremya, televisión soviética, 28 de abril de 1986. Video con subtítulos en inglés de Elena Filatova.",
+      "notaOriginal": "Este es el primer aviso oficial, dos días después de la explosión. Fijate lo poco que dice y que no habla de ningún sabotaje: solo de un accidente.",
+      "modelo": "models/chernobil.glb",
+      "video": "videos/chernobil.mp4",
+      "subtitulos": "subs/chernobil.vtt",
+      "uvRepeat": [
+        1,
+        1
+      ],
+      "uvOffset": [
+        0,
+        0
+      ],
+      "aspectoPantalla": 1.447,
+      "targets": [
+        1,
+        5
+      ],
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      }
+    },
+    {
+      "id": "amia",
+      "nombre": "Amia",
+      "epoca": "Padres",
+      "anio": "1994",
+      "titulo": "El atentado a la AMIA",
+      "tecnica": "Media verdad",
+      "ficha": "Junta dos hechos reales (las irregularidades de la investigación y el contrabando de armas) y los une con una mentira. Lo que tiene de cierto hace que lo falso parezca creíble, y el formato de \"último momento\" no te da tiempo para pensar.",
+      "falso": "Que el propio Estado facilitó el atentado para tapar un negocio de venta de armas a Ecuador y Croacia.",
+      "real": "El 18 de julio de 1994, un coche bomba destruyó la sede de la AMIA en Buenos Aires y murieron 85 personas. Es el peor atentado de la historia argentina. La Justicia lo atribuye a Irán y a Hezbollah. La investigación tuvo graves irregularidades y hubo condenas por encubrimiento. El contrabando de armas a Ecuador y Croacia también existió y fue juzgado, pero no hay ninguna prueba que lo conecte con el atentado.",
+      "tip": "Que una parte sea cierta no hace cierto todo lo demás. Separá los datos que se pueden comprobar de las conclusiones que alguien saca uniéndolos.",
+      "videoOriginal": "videos/originales/amia.mp4",
+      "subtitulosOriginal": "subs/originales/amia.vtt",
+      "fuenteOriginal": "Noticiero de ATC, 18 de julio de 1994 (Archivo Histórico RTA).",
+      "notaOriginal": "Es el mismo noticiero que se usó para el video editado. Lo que leen en realidad es un aviso de la Policía Federal por personas inescrupulosas que hacían pedidos (sangre, ambulancias, materiales) aprovechando el atentado. Después de una tragedia, los engaños aparecen enseguida.",
+      "modelo": "models/amia.glb",
+      "video": "videos/amia.mp4",
+      "subtitulos": "subs/amia.vtt",
+      "uvRepeat": [
+        1,
+        1
+      ],
+      "uvOffset": [
+        0,
+        0
+      ],
+      "aspectoPantalla": 1.471,
+      "targets": [
+        2
+      ],
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      }
+    },
+    {
+      "id": "911",
+      "nombre": "9/11",
+      "epoca": "Vos",
+      "anio": "2001",
+      "titulo": "Los atentados del 11 de septiembre",
+      "tecnica": "Gráfico falso",
+      "ficha": "Agrega un cartel con letras de noticiero sobre imágenes reales, y una supuesta voz \"desde adentro\" del gobierno. Un solo recurso gráfico alcanza para instalar una duda que después cuesta sacar.",
+      "falso": "Que el gobierno de Estados Unidos permitió los atentados para justificar el control del petróleo en Medio Oriente. Sobre la imagen se agrega el cartel \"STAGED ATTACK\" (\"ataque montado\").",
+      "real": "El 11 de septiembre de 2001, 19 miembros de Al Qaeda secuestraron cuatro aviones: dos chocaron contra las Torres Gemelas en Nueva York, uno contra el Pentágono y otro cayó en Pensilvania. Murieron casi 3.000 personas. La investigación oficial (la Comisión del 11-S, 2004) encontró fallas graves de los servicios de inteligencia, pero ninguna prueba de que el gobierno haya permitido o montado los atentados.",
+      "tip": "Un cartel o un zócalo se agrega en minutos sobre cualquier imagen. Fijate si el texto y la imagen vienen de la misma fuente, y buscá la transmisión original.",
+      "videoOriginal": "videos/originales/911.mp4",
+      "subtitulosOriginal": "subs/originales/911.vtt",
+      "fuenteOriginal": "NBC, 11 de septiembre de 2001, 8:52 de la mañana. Katie Couric y Matt Lauer en el programa Today (Internet Archive, archivo de TV del 11-S).",
+      "notaOriginal": "Es la toma exacta del video editado, con el zócalo real: \"World Trade Center\". Minutos después del primer choque, nadie hablaba de la Casa Blanca ni del petróleo.",
+      "modelo": "models/911.glb",
+      "video": "videos/911.mp4",
+      "subtitulos": "subs/911.vtt",
+      "uvRepeat": [
+        1,
+        1
+      ],
+      "uvOffset": [
+        0,
+        0
+      ],
+      "aspectoPantalla": 1.506,
+      "targets": [
+        3,
+        6
+      ],
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      }
+    }
+  ]
+}
