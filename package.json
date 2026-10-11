@@ -7,7 +7,8 @@
     "dev": "vite --host",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host",
-    "compilar-targets": "node tools/compilar-targets.mjs"
+    "compilar-targets": "node tools/compilar-targets.mjs",
+    "generar-afiches": "node tools/generar-afiches.mjs"
   },
   "overrides": {
     "canvas": "npm:@napi-rs/canvas@0.1.65"
@@ -28,6 +29,7 @@
     "@types/three": "^0.160.0",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "@vitejs/plugin-react": "^4.7.0",
+    "qrcode": "^1.5.4",
     "typescript": "^5.9.3",
     "vite": "^6.4.4"
   }
