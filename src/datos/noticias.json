@@ -68,8 +68,7 @@
       ],
       "aspectoPantalla": 1.447,
       "targets": [
-        0,
-        4
+        0
       ],
       "transform": {
         "position": [
@@ -113,8 +112,7 @@
       ],
       "aspectoPantalla": 1.447,
       "targets": [
-        1,
-        5
+        1
       ],
       "transform": {
         "position": [
@@ -202,8 +200,7 @@
       ],
       "aspectoPantalla": 1.506,
       "targets": [
-        3,
-        6
+        3
       ],
       "transform": {
         "position": [
