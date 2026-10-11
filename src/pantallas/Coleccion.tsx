@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Boton } from '../componentes/atomos/Boton';
+import { BotonAjustes } from '../componentes/atomos/BotonAjustes';
 import { CabeceraColeccion } from '../componentes/organismos/CabeceraColeccion';
 import { CierreColeccion } from '../componentes/organismos/CierreColeccion';
 import { PanelEvento } from '../componentes/organismos/PanelEvento';
@@ -12,10 +13,11 @@ type Props = {
   onAbrir: (n: Noticia) => void;
   onEscanear: () => void;
   onChequear: () => void;
+  onAjustes: () => void;
   onReiniciar: () => void;
 };
 
-export function Coleccion({ desbloqueadas, nueva, onAbrir, onEscanear, onChequear, onReiniciar }: Props) {
+export function Coleccion({ desbloqueadas, nueva, onAbrir, onEscanear, onChequear, onAjustes, onReiniciar }: Props) {
   const completa = desbloqueadas.length >= TOTAL;
   // Reinicio oculto para las demos: mantener apretado el título 3 segundos.
   const timer = useRef<number>();
@@ -23,6 +25,7 @@ export function Coleccion({ desbloqueadas, nueva, onAbrir, onEscanear, onChequea
   const soltar = () => window.clearTimeout(timer.current);
   return (
     <main className="p-coleccion">
+      <BotonAjustes onClick={onAjustes} />
       <div onPointerDown={apretar} onPointerUp={soltar} onPointerLeave={soltar} onPointerCancel={soltar}>
         <CabeceraColeccion desbloqueadas={desbloqueadas.length} total={TOTAL} />
       </div>

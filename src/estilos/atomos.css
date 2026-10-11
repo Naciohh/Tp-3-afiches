@@ -77,3 +77,24 @@
   position: absolute; inset: 0; pointer-events: none;
   background: repeating-linear-gradient(135deg, var(--color-rayado-oscuro) 0 7px, transparent 7px 14px);
 }
+
+/* Opción de ajuste (accesibilidad) */
+.c-opcion {
+  position: relative; display: flex; align-items: center; gap: var(--espacio-12); width: 100%; cursor: pointer;
+  padding: var(--espacio-12); background: var(--color-blanco); color: var(--color-texto);
+  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+}
+.c-opcion--elegida { background: var(--color-primario); color: var(--color-blanco); }
+.c-opcion__input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.c-opcion:has(.c-opcion__input:focus-visible) { outline: 3px solid var(--color-acento); outline-offset: 2px; }
+.c-opcion__control { display: flex; flex: none; width: 22px; height: 22px; }
+.c-opcion__texto { display: flex; flex: 1 0 0; flex-direction: column; min-width: 1px; }
+.c-opcion__nota { color: var(--color-texto-secundario); }
+.c-opcion--elegida .c-opcion__nota { color: inherit; }
+
+/* Botón de ajustes (engranaje) */
+.c-boton-ajustes {
+  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+  background: var(--color-blanco); color: var(--color-texto);
+  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+}

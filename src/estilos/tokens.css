@@ -49,6 +49,9 @@
   --borde-2: 2px;
   --borde-3: 3px;
 
+  /* Accesibilidad: tamaño de texto (variable texto/escala de Figma) */
+  --escala-texto: 1;
+
   /* Familias */
   --fuente-display: 'Archivo Black', sans-serif;
   --fuente-cuerpo: 'Inter', sans-serif;
@@ -56,16 +59,54 @@
 }
 
 /* Estilos de texto (nombres de Figma) */
-.t-display-40 { font: 400 40px/40px var(--fuente-display); }
-.t-display-28 { font: 400 28px/30px var(--fuente-display); }
-.t-display-20 { font: 400 20px/24px var(--fuente-display); }
-.t-display-16 { font: 400 16px/20px var(--fuente-display); }
-.t-display-16-espaciado { font: 400 16px/20px var(--fuente-display); letter-spacing: 0.03em; }
-.t-cuerpo-bold-17 { font: 700 17px/22px var(--fuente-cuerpo); }
-.t-cuerpo-semibold-16 { font: 600 16px/20px var(--fuente-cuerpo); }
-.t-cuerpo-regular-16 { font: 400 16px/24px var(--fuente-cuerpo); }
-.t-cuerpo-regular-14 { font: 400 14px/20px var(--fuente-cuerpo); }
-.t-cuerpo-bold-14 { font: 700 14px/20px var(--fuente-cuerpo); }
-.t-datos-medium-13 { font: 500 13px/18px var(--fuente-datos); }
-.t-datos-medium-13-espaciado { font: 500 13px/18px var(--fuente-datos); letter-spacing: 0.08em; }
-.t-datos-regular-12 { font: 400 12px/16px var(--fuente-datos); }
+.t-display-40 { font: 400 calc(40px * var(--escala-texto)) / calc(40px * var(--escala-texto)) var(--fuente-display); }
+.t-display-28 { font: 400 calc(28px * var(--escala-texto)) / calc(30px * var(--escala-texto)) var(--fuente-display); }
+.t-display-20 { font: 400 calc(20px * var(--escala-texto)) / calc(24px * var(--escala-texto)) var(--fuente-display); }
+.t-display-16 { font: 400 calc(16px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-display); }
+.t-display-16-espaciado { font: 400 calc(16px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-display); letter-spacing: 0.03em; }
+.t-cuerpo-bold-17 { font: 700 calc(17px * var(--escala-texto)) / calc(22px * var(--escala-texto)) var(--fuente-cuerpo); }
+.t-cuerpo-semibold-16 { font: 600 calc(16px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-cuerpo); }
+.t-cuerpo-regular-16 { font: 400 calc(16px * var(--escala-texto)) / calc(24px * var(--escala-texto)) var(--fuente-cuerpo); }
+.t-cuerpo-regular-14 { font: 400 calc(14px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-cuerpo); }
+.t-cuerpo-bold-14 { font: 700 calc(14px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-cuerpo); }
+.t-datos-medium-13 { font: 500 calc(13px * var(--escala-texto)) / calc(18px * var(--escala-texto)) var(--fuente-datos); }
+.t-datos-medium-13-espaciado { font: 500 calc(13px * var(--escala-texto)) / calc(18px * var(--escala-texto)) var(--fuente-datos); letter-spacing: 0.08em; }
+.t-datos-regular-12 { font: 400 calc(12px * var(--escala-texto)) / calc(16px * var(--escala-texto)) var(--fuente-datos); }
+
+/* Accesibilidad (colección "Colores" con modos en Figma, y "Accesibilidad" para el tamaño de texto).
+   Se activan con atributos en <html>; contraste alto y daltonismo se pueden combinar y se superponen. */
+:root[data-texto="grande"] { --escala-texto: 1.2; }
+:root[data-texto="muy-grande"] { --escala-texto: 1.4; }
+
+:root[data-contraste="alto"] {
+  --color-texto: #000000;
+  --color-primario: #0a2a5c;
+  --color-fondo: #ffffff;
+  --color-fondo-chat: #ffffff;
+  --color-texto-secundario: #1a1a1a;
+  --color-linea-suave: #000000;
+  --color-rayado-claro: #ffffff;
+  --color-rayado-oscuro: #e0e0e0;
+  --color-error: #8a1608;
+}
+:root[data-daltonismo="deuteranomalia"] {
+  --color-primario: #00508a;
+  --color-acento: #e69f00;
+  --color-salmon: #d55e00;
+  --color-salmon-sutil: #fbd9bd;
+  --color-error: #a63f00;
+}
+:root[data-daltonismo="protanopia"] {
+  --color-primario: #003f73;
+  --color-acento: #e69f00;
+  --color-salmon: #c24f00;
+  --color-salmon-sutil: #fbd9bd;
+  --color-error: #a63f00;
+}
+:root[data-daltonismo="tritanopia"] {
+  --color-primario: #0b4f57;
+  --color-acento: #e0405a;
+  --color-salmon: #e0405a;
+  --color-salmon-sutil: #ffd3da;
+  --color-error: #b3203a;
+}

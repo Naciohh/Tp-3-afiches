@@ -1,9 +1,11 @@
 import { Aviso } from '../componentes/moleculas/Aviso';
 import { Boton } from '../componentes/atomos/Boton';
+import { BotonAjustes } from '../componentes/atomos/BotonAjustes';
 
-export function Bienvenida({ onEmpezar, cargando }: { onEmpezar: () => void; cargando: boolean }) {
+export function Bienvenida({ onEmpezar, onAjustes, cargando }: { onEmpezar: () => void; onAjustes: () => void; cargando: boolean }) {
   return (
     <main className="p-bienvenida">
+      <BotonAjustes onClick={onAjustes} />
       <h1 className="t-display-40 p-bienvenida__titulo">
         <span>Así te</span>
         <span className="p-bienvenida__marca">engañan</span>
