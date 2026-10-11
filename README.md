@@ -96,5 +96,4 @@ npx vercel --prod
 ## Créditos
 
 - **Diseño:** la identidad visual, el design system (colores, tipografías, íconos y componentes) y el diseño de las interfaces fueron diseñados a mano en Figma por el equipo del proyecto.
-- **Código:** el paso de esos diseños a código, el reconocimiento de afiches (AR y QR) y el funcionamiento de la web se desarrollaron con asistencia de IA (Claude, de Anthropic).
-- **Piezas sumadas durante el desarrollo:** el panel del evento, el newsletter simulado y el estado bloqueado con rayas se armaron al pasar la web a Figma, y después se incorporaron al design system.
+- **Código:** el paso de esos diseños de Figma a código, el reconocimiento de afiches (AR y QR) y el funcionamiento de la web se desarrollaron con asistencia de IA (Claude, de Anthropic).
