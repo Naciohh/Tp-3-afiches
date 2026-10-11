@@ -13,5 +13,9 @@ import './estilos/moleculas.css';
 import './estilos/organismos.css';
 import './estilos/pantallas.css';
 import App from './App';
+import { aplicarAjustes, leerAjustes } from './lib/accesibilidad';
+
+// Se aplican antes de dibujar, para que no parpadee el diseño sin ajustes.
+aplicarAjustes(leerAjustes());
 
 createRoot(document.getElementById('raiz')!).render(<StrictMode><App /></StrictMode>);
