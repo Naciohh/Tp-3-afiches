@@ -6,18 +6,18 @@
 <meta name="description" content="Mapa transmedia de la campaña de concientización sobre desinformación y manipulación de contenido en redes. Recorridos de cinco user personas por las tres etapas de la campaña.">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://mapa-transmedia.vercel.app/">
+<link rel="canonical" href="https://mapa-transmedia-psi.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Mapa Transmedia de la Desinformación">
 <meta property="og:description" content="Cinco recorridos por las tres etapas de la campaña de concientización.">
-<meta property="og:image" content="https://mapa-transmedia.vercel.app/og.png">
-<meta property="og:url" content="https://mapa-transmedia.vercel.app/">
+<meta property="og:image" content="https://mapa-transmedia-psi.vercel.app/og.png">
+<meta property="og:url" content="https://mapa-transmedia-psi.vercel.app/">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mapa Transmedia de la Desinformación">
 <meta name="twitter:description" content="Cinco recorridos por las tres etapas de la campaña de concientización.">
-<meta name="twitter:image" content="https://mapa-transmedia.vercel.app/og.png">
+<meta name="twitter:image" content="https://mapa-transmedia-psi.vercel.app/og.png">
 <style>:root{color-scheme:dark}*{box-sizing:border-box}html,body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Mapa Transmedia de la Desinformación</title>
 </head>
@@ -584,6 +584,7 @@ function drawNode(n){
   /* título: una línea de base por renglón, medidas desde el tope de la pila */
   const y0=cur+m.LH-7;
   const t=el("text",{x:n.x,y:y0,class:"nlabel"});
+  if(n.t==="pieza")t.style.fill="#F4F4F9";
   if(n.t==="destino"){t.style.fill="#0A0A0A";t.style.letterSpacing=".12em";t.style.fontSize="27px";}
   n.l.forEach((ln,k)=>{const ts=el("tspan",{x:n.x,dy:k===0?0:m.LH});ts.textContent=ln;t.appendChild(ts);});
   g.appendChild(t);
