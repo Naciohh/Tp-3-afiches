@@ -18,7 +18,7 @@ export function Ajustes({ ajustes, onCambio, onListo }: Props) {
   return (
     <main className="p-ajustes">
       <h1 className="t-display-28">Accesibilidad</h1>
-      <p className="t-cuerpo-regular-16">Los mismos ajustes que en el juego. Se guardan en este celular.</p>
+      <p className="t-cuerpo-regular-16">Se guardan en este celular.</p>
       <GrupoAjustes leyenda="Tamaño de texto">
         {TEXTOS.map(([id, nombre]) => (
           <OpcionAjuste key={id} tipo="Radio" grupo="texto" titulo={nombre} elegida={ajustes.texto === id} onCambio={() => onCambio({ ...ajustes, texto: id })} />
