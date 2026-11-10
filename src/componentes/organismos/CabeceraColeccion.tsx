@@ -4,11 +4,11 @@ export function CabeceraColeccion({ desbloqueadas, total }: { desbloqueadas: num
   return (
     <header className="c-cabecera">
       <div className="c-cabecera__fila">
-        <h1 className="t-display-28">Colección</h1>
-        <p className="t-display-20 c-cabecera__contador">{desbloqueadas}/{total}</p>
+        <h1 className="t-display-40">Colección</h1>
+        <p className="t-rotulo c-cabecera__contador">{desbloqueadas}/{total}</p>
       </div>
       <Medidor llenos={desbloqueadas} total={total} />
-      <p className="t-cuerpo-regular-14 c-cabecera__nota">Cada afiche escondido abre un tele. Escaneá todos.</p>
+      <p className="t-cuerpo-14">Cada afiche escondido abre un tele. Escaneá todos.</p>
     </header>
   );
 }

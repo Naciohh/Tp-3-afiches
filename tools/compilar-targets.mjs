@@ -10,19 +10,24 @@ const { OfflineCompiler } = await import('mind-ar/src/image-target/offline-compi
 
 const { noticias } = JSON.parse(fs.readFileSync('src/datos/noticias.json', 'utf8'));
 const archivos = [];
+const ids = [];
 for (const n of noticias) {
   archivos[n.targets[0]] = `afiches/${n.id}.jpg`;
+  ids[n.targets[0]] = n.id;
 }
-// El título "ASI ENGAÑARON A TUS PADRES" es idéntico en dos afiches y la cámara los confundía.
-// Para compilar, esa franja se difumina: el reconocimiento se apoya en la foto de cada afiche
-// (el afiche impreso no cambia).
-const FRANJA = [0.33, 0.51];
-async function paraCompilar(archivo) {
+// Chernobil y AMIA comparten el título "ASÍ ENGAÑARON A TUS PADRES" (las mismas letras de collage)
+// y la cámara podía confundirlos. Para compilar, en esos dos se difumina la franja del título
+// (proporción del alto del afiche) y el reconocimiento se apoya en la foto de cada uno.
+// El afiche impreso no cambia. Si se rediseñan los afiches, hay que volver a medir estas franjas.
+const FRANJAS = { chernobil: [0.2, 0.64], amia: [0.11, 0.6] };
+async function paraCompilar(archivo, id) {
   const img = await loadImage(archivo);
   const c = createCanvas(img.width, img.height);
   const g = c.getContext('2d');
   g.drawImage(img, 0, 0);
-  const y0 = Math.round(img.height * FRANJA[0]), alto = Math.round(img.height * (FRANJA[1] - FRANJA[0]));
+  const franja = FRANJAS[id];
+  if (!franja) return c;
+  const y0 = Math.round(img.height * franja[0]), alto = Math.round(img.height * (franja[1] - franja[0]));
   const chica = createCanvas(Math.round(img.width / 40), Math.round(alto / 40));
   chica.getContext('2d').drawImage(c, 0, y0, img.width, alto, 0, 0, chica.width, chica.height);
   g.imageSmoothingEnabled = true;
@@ -30,9 +35,9 @@ async function paraCompilar(archivo) {
   return c;
 }
 const imagenes = [];
-for (const f of archivos) {
-  if (!f || !fs.existsSync(f)) throw new Error(`Falta el afiche ${f}`);
-  imagenes.push(await paraCompilar(f));
+archivos.forEach((f) => { if (!f || !fs.existsSync(f)) throw new Error(`Falta el afiche ${f}`); });
+for (const [i, f] of archivos.entries()) {
+  imagenes.push(await paraCompilar(f, ids[i]));
   console.log(`target ${imagenes.length - 1}: ${f}`);
 }
 const compilador = new OfflineCompiler();

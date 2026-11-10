@@ -5,8 +5,8 @@ import { url } from '../../datos/noticias';
 export function NoticiaOriginal({ noticia }: { noticia: Noticia }) {
   return (
     <section className="c-original">
-      <h3 className="t-display-16">La noticia original</h3>
-      <p className="t-cuerpo-regular-16">{noticia.notaOriginal}</p>
+      <h3 className="t-rotulo">La noticia original</h3>
+      <p className="t-cuerpo-15">{noticia.notaOriginal}</p>
       <video
         className="c-original__video"
         controls
@@ -18,7 +18,7 @@ export function NoticiaOriginal({ noticia }: { noticia: Noticia }) {
       >
         <track kind="subtitles" srcLang="es" label="Español" src={url(noticia.subtitulosOriginal)} default />
       </video>
-      <p className="t-datos-regular-12 c-original__fuente">Fuente: {noticia.fuenteOriginal}</p>
+      <p className="t-dato">Fuente: {noticia.fuenteOriginal}</p>
     </section>
   );
 }

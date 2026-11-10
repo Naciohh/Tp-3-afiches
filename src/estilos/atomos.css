@@ -1,100 +1,90 @@
 /* Átomos */
-.c-icono { display: inline-flex; flex: none; color: var(--color-primario); }
+.c-icono { display: inline-flex; flex: none; color: currentColor; }
 .c-icono svg { display: block; }
 
 .c-spinner { flex: none; animation: girar 0.8s linear infinite; }
 @keyframes girar { to { transform: rotate(360deg); } }
 
+/* Botones: Space Mono Bold, sombra corrida como en la landing (sin esquinas redondeadas). */
 .c-boton {
-  display: flex; align-items: center; justify-content: center; gap: var(--espacio-10);
-  width: 100%; padding: var(--espacio-16) var(--espacio-20);
-  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
-  text-decoration: none; text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: var(--espacio-12);
+  width: 100%; min-height: 56px; padding: var(--espacio-12) var(--espacio-20);
+  border: 0; text-decoration: none; text-align: center; transition: transform 0.12s, box-shadow 0.12s;
 }
-.c-boton--primario, .c-boton--cargando { background: var(--color-primario); color: var(--color-blanco); }
-.c-boton--secundario { background: var(--color-blanco); color: var(--color-texto); }
-.c-boton--acento { background: var(--color-acento); color: var(--color-texto); }
+.c-boton:active:not(:disabled) { transform: translate(3px, 3px); }
+.c-boton--primario, .c-boton--cargando { background: var(--color-primario); color: var(--blanco); box-shadow: 6px 6px 0 var(--color-primario-sombra), 6px 6px 0 2px var(--color-primario-borde); }
+.c-boton--secundario { background: var(--color-superficie); color: var(--color-texto-superficie); box-shadow: 6px 6px 0 var(--color-alerta); }
+.c-boton--acento { background: var(--color-acento); color: var(--tinta); box-shadow: 6px 6px 0 var(--color-alerta-sombra); }
+.c-boton:active:not(:disabled).c-boton--primario { box-shadow: 3px 3px 0 var(--color-primario-sombra), 3px 3px 0 2px var(--color-primario-borde); }
+.c-boton:active:not(:disabled).c-boton--secundario { box-shadow: 3px 3px 0 var(--color-alerta); }
 .c-boton .c-icono { color: currentColor; }
 .c-boton:disabled { cursor: default; }
+:root[data-contraste="alto"] .c-boton { outline: 2px solid var(--papel); }
 
+/* Pastilla de papel (contador de colección, centrar tele) */
 .c-pastilla {
   display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
-  padding: var(--espacio-8) var(--espacio-12);
-  background: var(--color-blanco); color: var(--color-texto);
-  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+  padding: var(--espacio-8) var(--espacio-14);
+  background: var(--color-superficie); color: var(--color-texto-superficie); box-shadow: 3px 3px 0 var(--color-alerta);
 }
 
 .c-boton-flotante {
-  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; text-transform: uppercase;
-  padding: var(--espacio-16) var(--espacio-32);
-  background: var(--color-acento); color: var(--color-texto);
-  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+  display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; min-height: 56px;
+  padding: var(--espacio-12) var(--espacio-36);
+  background: var(--color-acento); color: var(--tinta); box-shadow: 6px 6px 0 var(--color-alerta-sombra);
 }
 
-.c-miniatura { width: 130px; height: 98px; flex: none; object-fit: cover; pointer-events: none; }
+.c-miniatura { width: 112px; height: 84px; flex: none; object-fit: contain; pointer-events: none; }
 .c-miniatura--silueta { opacity: 0.35; }
 
-.c-punto {
-  display: block; width: 16px; height: 16px; flex: none; border-radius: var(--radio-8);
-  border: var(--borde-2) solid var(--color-texto);
-}
-.c-punto--abierto { background: var(--color-acento); }
-.c-punto--cerrado { background: var(--color-fondo); }
-
-.c-tramo { flex: 1 0 0; min-width: 1px; height: 10px; background: var(--color-blanco); border: var(--borde-1_5) solid var(--color-texto); }
+/* Tramos del medidor de colección */
+.c-tramo { flex: 1 0 0; min-width: 1px; height: 6px; background: transparent; box-shadow: inset 0 0 0 var(--borde-1_5) var(--color-acento); }
 .c-tramo--lleno { background: var(--color-acento); }
 
-.c-subtitulo {
-  display: flex; align-items: center; justify-content: center;
-  padding: var(--espacio-10) var(--espacio-16);
-  background: var(--color-subtitulo-fondo); border-radius: var(--radio-8);
-  color: var(--color-blanco); text-align: center;
-}
+/* Subtítulo sobre la tele, en la cámara */
+.c-subtitulo { display: flex; align-items: center; justify-content: center; padding: var(--espacio-12); background: var(--color-velo); color: var(--papel); text-align: center; }
 
+/* Campo de texto (newsletter) */
 .c-campo {
-  display: block; width: 100%; padding: var(--espacio-12);
-  background: var(--color-blanco); color: var(--color-texto);
-  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
-  outline-offset: 2px;
+  display: block; width: 100%; padding: var(--espacio-14);
+  background: var(--color-campo); color: var(--tinta);
+  border: var(--borde-2) solid var(--tinta); border-radius: 0; outline-offset: 2px;
 }
-.c-campo::placeholder { color: var(--color-texto-secundario); opacity: 1; }
-.c-campo--error { background: var(--color-salmon-sutil); border-color: var(--color-error); }
+.c-campo::placeholder { color: var(--tinta); opacity: 0.55; }
+.c-campo--error { border: var(--borde-3) solid var(--color-alerta); }
 
 .c-chip-red {
   display: inline-flex; align-items: center; gap: var(--espacio-8); text-decoration: none;
-  padding: var(--espacio-6) var(--espacio-12);
-  background: var(--color-blanco); color: var(--color-texto);
-  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+  padding: var(--espacio-8) var(--espacio-12); color: var(--tinta); border: var(--borde-1_5) solid var(--tinta);
 }
 
-.c-check {
-  display: flex; align-items: center; justify-content: center; flex: none;
-  width: 36px; height: 36px; border-radius: 18px;
-  background: var(--color-acento); border: var(--borde-2) solid var(--color-texto);
-}
+.c-check { display: flex; flex: none; width: 24px; height: 24px; color: var(--tinta); }
 
-.c-rayado {
-  position: absolute; inset: 0; pointer-events: none;
-  background: repeating-linear-gradient(135deg, var(--color-rayado-oscuro) 0 7px, transparent 7px 14px);
-}
+/* Censura: barra negra que tapa lo que todavía no se desbloqueó */
+.c-censura { display: block; height: 14px; max-width: 100%; flex: none; background: var(--tinta); }
 
 /* Opción de ajuste (accesibilidad) */
 .c-opcion {
-  position: relative; display: flex; align-items: center; gap: var(--espacio-12); width: 100%; cursor: pointer;
-  padding: var(--espacio-12); background: var(--color-blanco); color: var(--color-texto);
-  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+  position: relative; display: flex; align-items: center; gap: var(--espacio-14); width: 100%; cursor: pointer;
+  padding: var(--espacio-14); background: var(--color-fondo); color: var(--color-texto); border: var(--borde-2) solid var(--color-texto);
 }
-.c-opcion--elegida { background: var(--color-primario); color: var(--color-blanco); }
+.c-opcion--elegida { background: var(--color-superficie); color: var(--color-texto-superficie); border-color: var(--color-superficie); }
 .c-opcion__input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.c-opcion:has(.c-opcion__input:focus-visible) { outline: 3px solid var(--color-acento); outline-offset: 2px; }
+.c-opcion:has(.c-opcion__input:focus-visible) { outline: 3px dashed var(--color-acento); outline-offset: 4px; }
 .c-opcion__control { display: flex; flex: none; width: 22px; height: 22px; }
-.c-opcion__texto { display: flex; flex: 1 0 0; flex-direction: column; min-width: 1px; }
-.c-opcion__nota { color: var(--color-texto-secundario); }
-.c-opcion--elegida .c-opcion__nota { color: inherit; }
+.c-opcion__texto { display: flex; flex: 1 0 0; flex-direction: column; gap: var(--espacio-2); min-width: 1px; }
 
-/* Botón de ajustes (engranaje) */
+/* Botón de ajustes */
 .c-boton-ajustes {
   display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
-  background: var(--color-blanco); color: var(--color-texto);
-  border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6);
+  background: var(--color-fondo); color: var(--color-texto); border: var(--borde-2) solid var(--color-texto);
 }
+
+/* Sello rojo con desgaste ("FALSO") */
+.c-sello {
+  display: inline-flex; align-items: center; justify-content: center; width: 150px; height: 72px; flex: none;
+  background: url('../assets/texturas/sello-textura.webp') center / 100% 100% no-repeat;
+  color: var(--color-alerta); font: 400 34px / 1 var(--fuente-display); letter-spacing: 0.06em; text-transform: uppercase;
+  transform: rotate(8deg); pointer-events: none;
+}
+:root[data-contraste="alto"] .c-sello { background: none; border: 4px solid var(--color-alerta); }

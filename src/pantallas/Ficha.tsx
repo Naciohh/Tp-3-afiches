@@ -4,11 +4,13 @@ import { BloqueFicha } from '../componentes/moleculas/BloqueFicha';
 import { NoticiaOriginal } from '../componentes/organismos/NoticiaOriginal';
 import type { Noticia } from '../datos/noticias';
 import { abrirVisor } from '../ar/visorTele';
+import { useEntrada } from '../lib/useEntrada';
 
 type Props = { noticia: Noticia; onChequear: () => void; onVolver: () => void };
 
 export function Ficha({ noticia, onChequear, onVolver }: Props) {
   const caja = useRef<HTMLDivElement>(null);
+  const ref = useEntrada<HTMLElement>();
   useEffect(() => {
     // Un canvas cuyo contexto WebGL ya se cerró no se puede reusar: cada vez se crea uno nuevo.
     const lienzo = document.createElement('canvas');
@@ -22,15 +24,17 @@ export function Ficha({ noticia, onChequear, onVolver }: Props) {
   }, [noticia]);
 
   return (
-    <main className="p-ficha">
+    <main className="p-ficha" ref={ref}>
       <div className="p-ficha__tele" ref={caja} />
-      <p className="t-datos-medium-13 p-ficha__epoca">{noticia.epoca.toUpperCase()} · {noticia.anio}</p>
-      <h1 className="t-display-28">{noticia.titulo}</h1>
-      <BloqueFicha tipo="Falso" titulo="Lo que decía el video">{noticia.falso}</BloqueFicha>
-      <BloqueFicha tipo="Real" titulo="Lo que pasó de verdad">{noticia.real}</BloqueFicha>
-      <BloqueFicha tipo="Neutro" titulo={`Cómo te engañó: ${noticia.tecnica}`}>{noticia.ficha}</BloqueFicha>
+      <div className="p-ficha__cabeza">
+        <p className="t-rotulo p-ficha__epoca">{noticia.epoca} · {noticia.anio}</p>
+        <h1 className="t-display-34">{noticia.titulo}</h1>
+      </div>
+      <BloqueFicha tipo="Falso" etiqueta="Lo que decía el video">{noticia.falso}</BloqueFicha>
+      <BloqueFicha tipo="Real" etiqueta="Lo que pasó de verdad">{noticia.real}</BloqueFicha>
+      <BloqueFicha tipo="Neutro" etiqueta="Cómo te engañó" titulo={noticia.tecnica}>{noticia.ficha}</BloqueFicha>
       <NoticiaOriginal noticia={noticia} />
-      <BloqueFicha tipo="Consejo" titulo="Para no caer">{noticia.tip}</BloqueFicha>
+      <BloqueFicha tipo="Consejo" etiqueta="Para no caer">{noticia.tip}</BloqueFicha>
       <Boton tipo="Secundario" etiqueta="Cómo chequear una noticia" onClick={onChequear} />
       <Boton etiqueta="Volver" onClick={onVolver} />
     </main>

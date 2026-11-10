@@ -33,13 +33,16 @@ export const Camara = forwardRef<HTMLDivElement, Props & { refSubtitulo: React.R
           </button>
           {p.hayAjuste && <button type="button" onClick={p.onCentrar}><Pastilla etiqueta="Centrar tele" /></button>}
         </div>
+        {p.buscando && !p.error && !p.puedeDesbloquear && !p.necesitaSonido && (
+          <div className="p-camara__marco" aria-hidden="true"><i /><i /><i /><i /></div>
+        )}
         <div className="p-camara__subtitulo" ref={p.refSubtitulo} hidden>
           <Subtitulo texto={p.subtitulo ?? ''} />
         </div>
         <div className="p-camara__abajo">
           {p.error ? (
             <div className="p-camara__error">
-              <p className="t-cuerpo-bold-14">No pudimos abrir la cámara. Revisá que le diste permiso y que estás en https.</p>
+              <p className="t-cuerpo-15">No pudimos abrir la cámara. Revisá que le diste permiso y que estás en https.</p>
               <Boton etiqueta="Reintentar" onClick={p.onReintentar} />
             </div>
           ) : p.puedeDesbloquear ? (

@@ -1,11 +1,13 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '@fontsource/archivo-black/400.css';
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/500.css';
+// Tipografías de la identidad del evento: títulos, texto, datos y letras de collage.
+import '@fontsource/anton/400.css';
+import '@fontsource/special-elite/400.css';
+import '@fontsource/space-mono/400.css';
+import '@fontsource/space-mono/700.css';
+import '@fontsource/unifrakturmaguntia/400.css';
+import '@fontsource/old-standard-tt/700.css';
+import '@fontsource/im-fell-english/400-italic.css';
 import './estilos/tokens.css';
 import './estilos/base.css';
 import './estilos/atomos.css';

@@ -1,7 +1,9 @@
-import { cx } from '../../lib/cx';
+import { useEffect, useRef } from 'react';
 import type { Noticia } from '../../datos/noticias';
+import { cx } from '../../lib/cx';
+import { pegar } from '../../lib/movimiento';
+import { Censura } from '../atomos/Censura';
 import { Miniatura } from '../atomos/Miniatura';
-import { Rayado } from '../atomos/Rayado';
 
 type Props = {
   noticia: Noticia;
@@ -10,28 +12,31 @@ type Props = {
   onAbrir?: () => void;
 };
 
+// Hoja de papel con borde rasgado. Bloqueada: silueta de la tele y los datos tapados. Nueva: se pega con un rebote.
 export function TarjetaColeccion({ noticia, numero, estado, onAbrir }: Props) {
   const num = String(numero).padStart(2, '0');
+  const ref = useRef<HTMLButtonElement>(null);
+  useEffect(() => { if (estado === 'Nueva') pegar(ref.current, 0.35); }, [estado]);
   if (estado === 'Bloqueada') {
     return (
-      <div className="c-tarjeta c-tarjeta--bloqueada" aria-label={`Noticia ${num} bloqueada`}>
-        <Rayado />
+      <div className="c-tarjeta c-tarjeta--bloqueada hoja" aria-label={`Noticia ${num} bloqueada`}>
         <Miniatura id={noticia.id} estado="Silueta" />
         <div className="c-tarjeta__texto c-tarjeta__texto--bloqueada">
-          <p className="t-display-16">{num}</p>
-          <span className="c-barra" style={{ width: 96 }} />
-          <span className="c-barra" style={{ width: 112 }} />
+          <p className="t-numero c-tarjeta__numero">{num}</p>
+          <Censura ancho={150} />
+          <Censura ancho={104} />
+          <p className="t-rotulo-fino">Sin escanear</p>
         </div>
       </div>
     );
   }
   return (
-    <button className={cx('c-tarjeta', estado === 'Nueva' && 'c-tarjeta--nueva')} type="button" onClick={onAbrir}>
+    <button className={cx('c-tarjeta', 'hoja', estado === 'Nueva' && 'c-tarjeta--nueva')} type="button" onClick={onAbrir} ref={ref}>
       <Miniatura id={noticia.id} />
       <div className="c-tarjeta__texto">
-        <p className="t-display-16">{num}</p>
-        <p className="t-cuerpo-bold-17">{noticia.titulo}</p>
-        <p className="t-datos-regular-12">{noticia.epoca} · {noticia.anio}</p>
+        <p className="t-numero c-tarjeta__numero">{num}</p>
+        <p className="t-cuerpo-15">{noticia.titulo}</p>
+        <p className="t-rotulo-fino">{noticia.epoca} · {noticia.anio}</p>
       </div>
     </button>
   );

@@ -1,10 +1,12 @@
+import { Censura } from '../atomos/Censura';
+
 export function DescripcionEvento({ texto, abierto }: { texto: string; abierto: boolean }) {
-  if (abierto) return <p className="t-cuerpo-regular-16">{texto}</p>;
+  if (abierto) return <p className="t-cuerpo-15">{texto}</p>;
   return (
     <div className="c-barras" aria-hidden="true">
-      <span className="c-barra" style={{ width: 308 }} />
-      <span className="c-barra" style={{ width: 280 }} />
-      <span className="c-barra" style={{ width: 190 }} />
+      <Censura ancho={300} />
+      <Censura ancho={260} />
+      <Censura ancho={180} />
     </div>
   );
 }

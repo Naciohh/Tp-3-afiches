@@ -12,7 +12,7 @@ type Props = {
 export function CampoTexto({ valor, onCambio, error, placeholder = 'tu@mail.com', tipo = 'email', etiquetaAccesible }: Props) {
   return (
     <input
-      className={cx('c-campo', 't-cuerpo-regular-16', error && 'c-campo--error')}
+      className={cx('c-campo', 't-cuerpo-15', error && 'c-campo--error')}
       type={tipo}
       inputMode="email"
       autoComplete="email"

@@ -1,10 +1,9 @@
-import { Icono, type NombreIcono } from '../atomos/Icono';
-
-export function Aviso({ icono, texto }: { icono: NombreIcono; texto: string }) {
+// Aviso numerado de la bienvenida (01, 02, 03 en naranja).
+export function Aviso({ numero, texto }: { numero: number; texto: string }) {
   return (
     <li className="c-aviso">
-      <Icono nombre={icono} />
-      <p className="t-cuerpo-regular-14">{texto}</p>
+      <span className="t-rotulo c-aviso__numero">{String(numero).padStart(2, '0')}</span>
+      <p className="t-cuerpo-14">{texto}</p>
     </li>
   );
 }

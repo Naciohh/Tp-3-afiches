@@ -2,12 +2,12 @@
 export function VistaPreviaAjustes() {
   return (
     <div className="c-vista-previa" aria-hidden="true">
-      <p className="t-cuerpo-bold-14">Así se ve</p>
-      <p className="t-cuerpo-regular-16">Cada afiche escondido abre un tele. Escaneá todos.</p>
+      <p className="t-rotulo">Así se ve</p>
+      <p className="t-cuerpo-15">Cada afiche escondido abre un tele. Escaneá todos.</p>
       <div className="c-vista-previa__muestras">
-        <span style={{ background: 'var(--color-primario)' }} />
-        <span style={{ background: 'var(--color-acento)' }} />
-        <span style={{ background: 'var(--color-salmon)' }} />
+        <span style={{ background: 'var(--azul)' }} />
+        <span style={{ background: 'var(--naranja)' }} />
+        <span style={{ background: 'var(--rojo)' }} />
       </div>
     </div>
   );

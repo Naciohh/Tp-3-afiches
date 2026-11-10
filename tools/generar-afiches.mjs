@@ -7,7 +7,14 @@ const require = createRequire(import.meta.url);
 const { createCanvas, loadImage } = require('canvas');
 const QRCode = require('qrcode');
 
-const base = (process.argv[2] ?? 'https://tp-3-afiches.vercel.app').replace(/\/$/, '');
+// Los afiches con la identidad nueva (desinfo) ya vienen diseñados con su QR: van directo a afiches/<id>.jpg.
+// Este script arma los afiches viejos a partir de afiches/arte/ y los pisaría, por eso pide confirmación.
+if (!process.argv.includes('--forzar')) {
+  console.log('Los afiches actuales ya traen el QR. Este script los reemplazaría por el arte viejo de afiches/arte/.');
+  console.log('Si de verdad querés regenerarlos: npm run generar-afiches -- --forzar [url]');
+  process.exit(0);
+}
+const base = (process.argv.slice(2).find((a) => a !== '--forzar') ?? 'https://tp-3-afiches.vercel.app').replace(/\/$/, '');
 const { noticias } = JSON.parse(fs.readFileSync('src/datos/noticias.json', 'utf8'));
 
 for (const n of noticias) {

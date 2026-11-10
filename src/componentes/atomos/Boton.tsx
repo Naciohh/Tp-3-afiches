@@ -14,14 +14,14 @@ type Props = {
   type?: 'button' | 'submit';
 };
 
-// Botón de la web. Cuatro tipos, como en Figma: Primario, Secundario, Acento y Cargando.
+// Botón de la web. Cuatro tipos, como en Figma: Primario (azul), Secundario (papel), Acento (naranja) y Cargando.
 export function Boton({ etiqueta, tipo = 'Primario', icono, onClick, href, deshabilitado, type = 'button' }: Props) {
   const clase = cx('c-boton', `c-boton--${tipo.toLowerCase()}`);
   const contenido = (
     <>
       {tipo === 'Cargando' && <Spinner />}
       {icono}
-      <span className="t-cuerpo-bold-17">{etiqueta}</span>
+      <span className="t-boton">{etiqueta}</span>
     </>
   );
   if (href) {

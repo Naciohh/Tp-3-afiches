@@ -2,39 +2,82 @@
 #raiz { position: relative; }
 .pantalla { position: fixed; inset: 0; overflow-y: auto; background: var(--color-fondo); -webkit-overflow-scrolling: touch; z-index: 10; }
 
-.p-bienvenida {
-  display: flex; flex-direction: column; justify-content: flex-end; gap: var(--espacio-18);
-  min-height: 100%; padding: var(--espacio-56) var(--espacio-24) var(--espacio-32);
-}
-.p-bienvenida__titulo { display: flex; flex-direction: column; align-items: flex-start; }
-.p-bienvenida__marca { position: relative; z-index: 0; }
-.p-bienvenida__marca::before { content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: calc(26px * var(--escala-texto)); height: calc(13px * var(--escala-texto)); background: var(--color-salmon); }
-.p-bienvenida__avisos { border-top: var(--borde-2) solid var(--color-texto); }
+/* Rótulo de submarca arriba a la izquierda */
+.submarca { position: absolute; top: 30px; left: var(--espacio-24); z-index: 2; }
 
-.p-coleccion, .p-ficha, .p-chequear { display: flex; flex-direction: column; gap: var(--espacio-8); padding: var(--espacio-56) var(--espacio-24) var(--espacio-24); max-width: 600px; margin: 0 auto; }
-.p-ficha, .p-chequear { padding-top: var(--espacio-24); gap: var(--espacio-6); }
-.p-chequear { gap: var(--espacio-10); }
+/* Bienvenida */
+.p-bienvenida {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: var(--espacio-18);
+  min-height: 100%; padding: var(--espacio-80) var(--espacio-24) var(--espacio-36); overflow: hidden;
+}
+.p-bienvenida__vortice {
+  position: absolute; left: 0; right: 0; top: 64px; height: 316px; z-index: 0; pointer-events: none;
+  background: url('../assets/texturas/hero-vortex.webp') center / cover no-repeat; opacity: calc(0.45 * var(--textura-visible));
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent); mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+.p-bienvenida > *:not(.p-bienvenida__vortice):not(.submarca):not(.c-boton-ajustes) { position: relative; z-index: 1; }
+.p-bienvenida__titulo { display: flex; flex-direction: column; align-items: flex-start; gap: var(--espacio-8); }
+.p-bienvenida__marca { display: inline-block; padding: 0.14em 0.2em 0.02em; background: var(--color-superficie); color: var(--color-texto-superficie); transform: rotate(2deg); transform-origin: left center; }
+.p-bienvenida__avisos { margin-top: var(--espacio-4); }
+.p-bienvenida > .c-boton { margin-top: var(--espacio-8); }
+
+/* Colección, ficha y chequear */
+.p-coleccion, .p-ficha, .p-chequear { display: flex; flex-direction: column; gap: var(--espacio-28); padding: var(--espacio-64) var(--espacio-24) var(--espacio-48, 48px); max-width: 600px; margin: 0 auto; }
+.p-ficha, .p-chequear { padding-top: var(--espacio-24); gap: var(--espacio-32); }
 .p-ficha__tele { width: 100%; height: 257px; flex: none; }
 .p-ficha__lienzo { display: block; width: 100%; height: 100%; }
-.p-ficha__epoca { color: var(--color-primario); }
-.p-chequear__etiqueta { color: var(--color-texto-secundario); }
-.p-chequear__fuentes { display: flex; flex-direction: column; gap: var(--espacio-10); }
-.p-chequear__fuentes li { position: relative; padding-left: 14px; }
-.p-chequear__fuentes li::before { content: '•'; position: absolute; left: 0; }
+.p-ficha__cabeza { display: flex; flex-direction: column; gap: var(--espacio-8); }
+.p-ficha__epoca, .p-chequear__etiqueta { color: var(--color-acento); }
+.p-chequear__cabeza { display: flex; flex-direction: column; gap: var(--espacio-10); }
+.p-chequear__fuentes { display: flex; flex-direction: column; gap: var(--espacio-12); }
+.p-chequear__fuentes li { position: relative; padding-left: 20px; }
+.p-chequear__fuentes li::before { content: '—'; position: absolute; left: 0; }
+.p-chequear__fuentes a { color: var(--tinta); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 
 /* Cámara */
-.p-camara { position: fixed; inset: 0; background: var(--color-gris-camara); overflow: hidden; }
+.p-camara { position: fixed; inset: 0; background: var(--tinta); overflow: hidden; }
 .p-camara__ar { position: absolute; inset: 0; touch-action: none; }
 .p-camara__ar video, .p-camara__ar canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .p-camara__capa { position: absolute; inset: 0; pointer-events: none; }
 .p-camara__capa > * { pointer-events: none; }
 .p-camara__capa button, .p-camara__capa a, .p-camara__abajo > * { pointer-events: auto; }
-.p-camara__arriba { position: absolute; left: var(--espacio-12); right: var(--espacio-12); top: var(--espacio-56); display: flex; justify-content: space-between; align-items: flex-start; }
+.p-camara__arriba { position: absolute; left: var(--espacio-12); right: var(--espacio-12); top: var(--espacio-56); display: flex; gap: var(--espacio-12); align-items: flex-start; }
 .p-camara__pastilla { display: block; }
 .p-camara__abajo { position: absolute; left: 0; right: 0; bottom: calc(var(--espacio-32) + env(safe-area-inset-bottom)); display: flex; justify-content: center; padding: 0 var(--espacio-24); }
 .p-camara__subtitulo { position: absolute; left: 0; top: 0; width: min(330px, calc(100vw - 60px)); transform: translate(-50%, 0); }
-.p-camara__error { display: flex; flex-direction: column; gap: var(--espacio-12); max-width: 342px; padding: var(--espacio-16); background: var(--color-blanco); border: var(--borde-2) solid var(--color-texto); border-radius: var(--radio-6); }
+.p-camara__error { display: flex; flex-direction: column; gap: var(--espacio-16); width: 100%; max-width: 342px; padding: var(--espacio-18); background: var(--color-velo); border: var(--borde-1) solid var(--papel); color: var(--papel); }
+/* Marco de escaneo: cuatro esquinas de papel mientras se busca el afiche */
+.p-camara__marco { position: absolute; left: 46px; right: 46px; top: 22%; bottom: 24%; }
+.p-camara__marco > i { position: absolute; width: 28px; height: 28px; border: 3px solid var(--papel); }
+.p-camara__marco > i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+.p-camara__marco > i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+.p-camara__marco > i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; }
+.p-camara__marco > i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; }
 
-.p-ajustes { display: flex; flex-direction: column; gap: var(--espacio-16); padding: var(--espacio-24) var(--espacio-24) var(--espacio-32); max-width: 600px; margin: 0 auto; }
+/* Ajustes */
+.p-ajustes { display: flex; flex-direction: column; gap: var(--espacio-24); padding: var(--espacio-32) var(--espacio-24) var(--espacio-36); max-width: 600px; margin: 0 auto; }
+.p-ajustes__cabeza { display: flex; flex-direction: column; gap: var(--espacio-8); }
+
 .p-bienvenida, .p-coleccion { position: relative; }
-.p-bienvenida > .c-boton-ajustes, .p-coleccion > .c-boton-ajustes { position: absolute; top: 16px; right: var(--espacio-24); z-index: 2; }
+.p-bienvenida > .c-boton-ajustes, .p-coleccion > .c-boton-ajustes { position: absolute; top: 16px; right: var(--espacio-24); z-index: 3; }
+
+/* Pantalla de carga: DESINFO en letras de collage */
+.p-carga { position: fixed; inset: 0; z-index: 100; overflow: hidden; cursor: pointer; }
+.p-carga__mitad { position: absolute; left: -4%; width: 108%; background: var(--tinta); }
+.p-carga__mitad--arriba { top: 0; height: 52%; }
+.p-carga__mitad--abajo { bottom: 0; height: 48%; }
+.p-carga__mitad--arriba::after, .p-carga__mitad--abajo::before {
+  content: ''; position: absolute; left: 0; right: 0; height: 34px;
+  background: url('../assets/texturas/papel-rasgado-borde.webp') center / 100% 100% no-repeat; opacity: 0; transition: opacity 0.15s;
+}
+.p-carga--abriendo .p-carga__mitad--arriba::after, .p-carga--abriendo .p-carga__mitad--abajo::before { opacity: var(--textura-visible); }
+.p-carga__mitad--arriba::after { bottom: -26px; transform: rotate(180deg); }
+.p-carga__mitad--abajo::before { top: -26px; }
+.p-carga__escena { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--espacio-28); }
+.p-carga__palabra { display: flex; align-items: center; gap: 0; font-size: calc(min(14vw, 64px)); }
+.p-carga__palabra .lc { margin: 0 -0.03em; }
+.p-carga__lema { color: var(--color-acento); }
+.p-carga__ui { position: absolute; left: 20px; right: 20px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--papel); }
+.p-carga__ui--arriba { top: 22px; }
+.p-carga__ui--abajo { bottom: calc(20px + env(safe-area-inset-bottom)); }
+.p-carga__cinta { position: absolute; width: 84px; height: 22px; background: url('../assets/texturas/cinta.webp') center / 100% 100% no-repeat; opacity: 0; }

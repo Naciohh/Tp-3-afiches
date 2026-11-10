@@ -6,6 +6,7 @@ import { aplicarAjustes, leerAjustes } from './lib/accesibilidad';
 import { guardarProgreso, leerProgreso } from './lib/progreso';
 import { Ajustes } from './pantallas/Ajustes';
 import { Bienvenida } from './pantallas/Bienvenida';
+import { Carga } from './pantallas/Carga';
 import { Camara } from './pantallas/Camara';
 import { Chequear } from './pantallas/Chequear';
 import { Coleccion } from './pantallas/Coleccion';
@@ -23,6 +24,9 @@ function pantallaInicial(): [Pantalla, string | null] {
 
 export default function App() {
   const [inicial] = useState(pantallaInicial);
+  // La carga de DESINFO se ve una vez por visita (si se recarga la página en la misma pestaña, no se repite).
+  const [carga, setCarga] = useState(() => { try { return sessionStorage.getItem('desinfo.carga') !== '1'; } catch { return true; } });
+  const finCarga = useCallback(() => { try { sessionStorage.setItem('desinfo.carga', '1'); } catch { /* sin almacenamiento */ } setCarga(false); }, []);
   const [pantalla, setPantalla] = useState<Pantalla>(inicial[0]);
   const [anterior, setAnterior] = useState<Pantalla>('coleccion');
   const [ajustes, setAjustes] = useState(leerAjustes);
@@ -111,7 +115,8 @@ export default function App() {
 
   return (
     <>
-      {pantalla === 'bienvenida' && <div className="pantalla"><Bienvenida onEmpezar={empezar} onAjustes={() => aAjustes('bienvenida')} cargando={iniciando} /></div>}
+      {carga && <Carga onFin={finCarga} />}
+      {pantalla === 'bienvenida' && <div className="pantalla trama"><Bienvenida onEmpezar={empezar} onAjustes={() => aAjustes('bienvenida')} cargando={iniciando} /></div>}
       {/* La cámara se monta una vez y queda debajo de las demás pantallas. */}
       {empezado && (
         <Camara
@@ -133,7 +138,7 @@ export default function App() {
         />
       )}
       {pantalla === 'coleccion' && (
-        <div className="pantalla">
+        <div className="pantalla trama">
           <Coleccion
             desbloqueadas={desbloqueadas}
             nueva={nueva}
@@ -146,10 +151,10 @@ export default function App() {
         </div>
       )}
       {pantalla === 'ficha' && ficha && (
-        <div className="pantalla"><Ficha noticia={ficha} onChequear={() => aChequear('ficha')} onVolver={() => setPantalla('coleccion')} /></div>
+        <div className="pantalla trama"><Ficha noticia={ficha} onChequear={() => aChequear('ficha')} onVolver={() => setPantalla('coleccion')} /></div>
       )}
-      {pantalla === 'ajustes' && <div className="pantalla"><Ajustes ajustes={ajustes} onCambio={setAjustes} onListo={() => setPantalla(anterior)} /></div>}
-      {pantalla === 'chequear' && <div className="pantalla"><Chequear onVolver={() => setPantalla(anterior)} /></div>}
+      {pantalla === 'ajustes' && <div className="pantalla trama"><Ajustes ajustes={ajustes} onCambio={setAjustes} onListo={() => setPantalla(anterior)} /></div>}
+      {pantalla === 'chequear' && <div className="pantalla trama"><Chequear onVolver={() => setPantalla(anterior)} /></div>}
     </>
   );
 }

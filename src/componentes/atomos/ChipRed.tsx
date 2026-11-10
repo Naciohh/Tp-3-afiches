@@ -4,13 +4,13 @@ export function ChipRed({ red, url }: { red: 'Instagram' | 'TikTok'; url: string
   const pendiente = !/^https?:\/\//.test(url);
   return (
     <a
-      className="c-chip-red t-cuerpo-bold-14"
+      className="c-chip-red t-rotulo"
       href={pendiente ? '#' : url}
       target={pendiente ? undefined : '_blank'}
       rel="noopener"
       onClick={pendiente ? (e) => e.preventDefault() : undefined}
     >
-      <Icono nombre={red} />
+      <Icono nombre={red} tamano={16} />
       {red}
     </a>
   );

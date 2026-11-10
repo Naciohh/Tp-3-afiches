@@ -1,23 +1,42 @@
-/* Variables y estilos de texto tomados del archivo "Design system - Afiches" de Figma.
-   Si cambia algo en Figma (colecciones Colores y Medidas, estilos de texto), se cambia acá. */
+/* Identidad del evento desinfo (landing, manual de marca y Figma "Web afiches · identidad nueva").
+   Paleta = colección de variables "Identidad evento" del Figma. Si cambia algo ahí, se cambia acá. */
 :root {
-  /* Colores */
-  --color-texto: #0a0a0a;
-  --color-primario: #1b3b6f;
-  --color-acento: #f0750c;
-  --color-salmon: #ff6e6e;
-  --color-fondo: #f4f4f9;
-  --color-fondo-chat: #dbe2ed;
-  --color-blanco: #ffffff;
-  --color-texto-secundario: #5c5c5c;
-  --color-salmon-sutil: #ffd9d9;
-  --color-linea-suave: #c9c9d1;
-  --color-rayado-claro: #e4e8ef;
-  --color-rayado-oscuro: #d3dae6;
+  /* Paleta base */
+  --tinta: #0a0a0a;
+  --carbon: #050505;
+  --papel: #e4ddcb;
+  --papel-claro: #f1ebdb;
+  --rojo: #d7262c;
+  --rojo-apagado: #b83330;
+  --azul: #1b3b6f;
+  --azul-noche: #0e2145;
+  --azul-frio: #4f7cc9;
+  --naranja: #f0750c;
+  --oxido: #c2531a;
+  --salmon: #ff6e6e;
+  --blanco: #f4f4f9;
+  --gris-papel: #2b2723;
+
+  /* Roles (lo que usan los componentes) */
+  --color-fondo: var(--tinta);            /* fondo de todas las pantallas */
+  --color-texto: var(--papel);            /* texto sobre el fondo oscuro */
+  --color-superficie: var(--papel);       /* hojas de papel: tarjetas, bloques, paneles */
+  --color-texto-superficie: var(--tinta); /* texto sobre papel */
+  --color-campo: var(--papel-claro);
+  --color-primario: var(--azul);
+  --color-primario-sombra: var(--azul-noche);
+  --color-primario-borde: var(--azul-frio);
+  --color-acento: var(--naranja);         /* solo sobre fondo oscuro o como relleno con texto tinta */
+  --color-alerta: var(--rojo);            /* sellos, tachados, error: nunca texto chico */
+  --color-alerta-sombra: var(--rojo-apagado);
+  --color-blanco: var(--blanco);
   --color-negro-video: #000000;
-  --color-gris-camara: #999999;
-  --color-subtitulo-fondo: rgba(0, 0, 0, 0.78);
-  --color-error: #c0392b;
+  --color-velo: rgba(10, 10, 10, 0.88);   /* cajas sobre la cámara */
+  --color-linea: rgba(228, 221, 203, 0.25);
+
+  /* Texturas (se apagan con contraste alto) */
+  --textura-trama: 0.07;
+  --textura-visible: 1;
 
   /* Espacios */
   --espacio-2: 2px;
@@ -34,79 +53,73 @@
   --espacio-26: 26px;
   --espacio-28: 28px;
   --espacio-32: 32px;
+  --espacio-36: 36px;
   --espacio-56: 56px;
   --espacio-64: 64px;
   --espacio-72: 72px;
   --espacio-80: 80px;
 
-  /* Radios y bordes */
-  --radio-4: 4px;
-  --radio-5: 5px;
-  --radio-6: 6px;
-  --radio-8: 8px;
+  /* Bordes (la identidad no usa esquinas redondeadas) */
   --borde-1: 1px;
   --borde-1_5: 1.5px;
   --borde-2: 2px;
   --borde-3: 3px;
 
-  /* Accesibilidad: tamaño de texto (variable texto/escala de Figma) */
+  /* Accesibilidad: tamaño de texto */
   --escala-texto: 1;
 
   /* Familias */
-  --fuente-display: 'Archivo Black', sans-serif;
-  --fuente-cuerpo: 'Inter', sans-serif;
-  --fuente-datos: 'IBM Plex Mono', monospace;
+  --fuente-display: 'Anton', 'Arial Narrow', sans-serif;
+  --fuente-cuerpo: 'Special Elite', 'Courier New', monospace;
+  --fuente-datos: 'Space Mono', ui-monospace, monospace;
+  --fuente-collage-1: 'UnifrakturMaguntia', Georgia, serif;
+  --fuente-collage-2: 'Old Standard TT', Georgia, serif;
+  --fuente-collage-3: 'IM Fell English', Georgia, serif;
 }
 
-/* Estilos de texto (nombres de Figma) */
-.t-display-40 { font: 400 calc(40px * var(--escala-texto)) / calc(40px * var(--escala-texto)) var(--fuente-display); }
-.t-display-28 { font: 400 calc(28px * var(--escala-texto)) / calc(30px * var(--escala-texto)) var(--fuente-display); }
-.t-display-20 { font: 400 calc(20px * var(--escala-texto)) / calc(24px * var(--escala-texto)) var(--fuente-display); }
-.t-display-16 { font: 400 calc(16px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-display); }
-.t-display-16-espaciado { font: 400 calc(16px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-display); letter-spacing: 0.03em; }
-.t-cuerpo-bold-17 { font: 700 calc(17px * var(--escala-texto)) / calc(22px * var(--escala-texto)) var(--fuente-cuerpo); }
-.t-cuerpo-semibold-16 { font: 600 calc(16px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-cuerpo); }
-.t-cuerpo-regular-16 { font: 400 calc(16px * var(--escala-texto)) / calc(24px * var(--escala-texto)) var(--fuente-cuerpo); }
-.t-cuerpo-regular-14 { font: 400 calc(14px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-cuerpo); }
-.t-cuerpo-bold-14 { font: 700 calc(14px * var(--escala-texto)) / calc(20px * var(--escala-texto)) var(--fuente-cuerpo); }
-.t-datos-medium-13 { font: 500 calc(13px * var(--escala-texto)) / calc(18px * var(--escala-texto)) var(--fuente-datos); }
-.t-datos-medium-13-espaciado { font: 500 calc(13px * var(--escala-texto)) / calc(18px * var(--escala-texto)) var(--fuente-datos); letter-spacing: 0.08em; }
-.t-datos-regular-12 { font: 400 calc(12px * var(--escala-texto)) / calc(16px * var(--escala-texto)) var(--fuente-datos); }
+/* Estilos de texto. Reglas de la landing del evento:
+   títulos en Anton y mayúsculas, interlineado 1 (0.92 en los grandes);
+   texto en Special Elite con interlineado 1.45;
+   rótulos en Space Mono, mayúsculas, 11 px y tracking 25%;
+   botones en Space Mono Bold 13, mayúsculas y tracking 20%. */
+.t-display-64 { font: 400 calc(64px * var(--escala-texto)) / 0.92 var(--fuente-display); text-transform: uppercase; }
+.t-display-40 { font: 400 calc(40px * var(--escala-texto)) / 0.95 var(--fuente-display); text-transform: uppercase; }
+.t-display-34 { font: 400 calc(34px * var(--escala-texto)) / 1 var(--fuente-display); text-transform: uppercase; }
+.t-display-28 { font: 400 calc(28px * var(--escala-texto)) / 1 var(--fuente-display); text-transform: uppercase; }
+.t-display-22 { font: 400 calc(22px * var(--escala-texto)) / 1.1 var(--fuente-display); text-transform: uppercase; }
+.t-display-20 { font: 400 calc(20px * var(--escala-texto)) / 1.1 var(--fuente-display); text-transform: uppercase; }
+.t-display-16 { font: 400 calc(16px * var(--escala-texto)) / 1.1 var(--fuente-display); text-transform: uppercase; }
+.t-numero { font: 400 calc(28px * var(--escala-texto)) / 1 var(--fuente-display); }
+.t-cuerpo-17 { font: 400 calc(17px * var(--escala-texto)) / 1.5 var(--fuente-cuerpo); }
+.t-cuerpo-15 { font: 400 calc(15px * var(--escala-texto)) / 1.45 var(--fuente-cuerpo); }
+.t-cuerpo-14 { font: 400 calc(14px * var(--escala-texto)) / 1.45 var(--fuente-cuerpo); }
+.t-cuerpo-13 { font: 400 calc(13px * var(--escala-texto)) / 1.4 var(--fuente-cuerpo); }
+.t-rotulo { font: 700 calc(11px * var(--escala-texto)) / 1.4 var(--fuente-datos); letter-spacing: 0.25em; text-transform: uppercase; }
+.t-rotulo-fino { font: 400 calc(10px * var(--escala-texto)) / 1.6 var(--fuente-datos); letter-spacing: 0.25em; text-transform: uppercase; }
+.t-dato { font: 400 calc(11px * var(--escala-texto)) / 1.45 var(--fuente-datos); }
+.t-boton { font: 700 calc(13px * var(--escala-texto)) / 1.2 var(--fuente-datos); letter-spacing: 0.2em; text-transform: uppercase; }
+.t-contador { font: 700 calc(36px * var(--escala-texto)) / 1 var(--fuente-datos); }
 
-/* Accesibilidad (colección "Colores" con modos en Figma, y "Accesibilidad" para el tamaño de texto).
-   Se activan con atributos en <html>; contraste alto y daltonismo se pueden combinar y se superponen. */
+/* Accesibilidad. Se activan con atributos en <html>; contraste alto y daltonismo se pueden combinar. */
 :root[data-texto="grande"] { --escala-texto: 1.2; }
 :root[data-texto="muy-grande"] { --escala-texto: 1.4; }
 
+/* Contraste alto: negro puro, papel blanco, acento más claro y sin texturas. */
 :root[data-contraste="alto"] {
-  --color-texto: #000000;
-  --color-primario: #0a2a5c;
-  --color-fondo: #ffffff;
-  --color-fondo-chat: #ffffff;
-  --color-texto-secundario: #1a1a1a;
-  --color-linea-suave: #000000;
-  --color-rayado-claro: #ffffff;
-  --color-rayado-oscuro: #e0e0e0;
-  --color-error: #8a1608;
+  --tinta: #000000;
+  --carbon: #000000;
+  --papel: #ffffff;
+  --papel-claro: #ffffff;
+  --blanco: #ffffff;
+  --naranja: #ff9a3d;
+  --azul: #0a2a5c;
+  --azul-frio: #8fb4ff;
+  --gris-papel: #ffffff;
+  --color-velo: rgba(0, 0, 0, 0.96);
+  --color-linea: rgba(255, 255, 255, 0.6);
+  --textura-trama: 0;
+  --textura-visible: 0;
 }
-:root[data-daltonismo="deuteranomalia"] {
-  --color-primario: #00508a;
-  --color-acento: #e69f00;
-  --color-salmon: #d55e00;
-  --color-salmon-sutil: #fbd9bd;
-  --color-error: #a63f00;
-}
-:root[data-daltonismo="protanopia"] {
-  --color-primario: #003f73;
-  --color-acento: #e69f00;
-  --color-salmon: #c24f00;
-  --color-salmon-sutil: #fbd9bd;
-  --color-error: #a63f00;
-}
-:root[data-daltonismo="tritanopia"] {
-  --color-primario: #0b4f57;
-  --color-acento: #e0405a;
-  --color-salmon: #e0405a;
-  --color-salmon-sutil: #ffd3da;
-  --color-error: #b3203a;
-}
+:root[data-daltonismo="deuteranomalia"] { --azul: #00508a; --naranja: #e69f00; --rojo: #d55e00; --salmon: #d55e00; --rojo-apagado: #a63f00; }
+:root[data-daltonismo="protanopia"] { --azul: #003f73; --naranja: #e69f00; --rojo: #c24f00; --salmon: #c24f00; --rojo-apagado: #a63f00; }
+:root[data-daltonismo="tritanopia"] { --azul: #0b4f57; --naranja: #e0405a; --rojo: #e0405a; --salmon: #e0405a; --rojo-apagado: #b3203a; }
