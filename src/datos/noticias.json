@@ -1,21 +1,17 @@
 {
-  "eventUrl": "TODO_URL_DEL_EVENTO_TP4",
+  "eventUrl": "",
   "evento": {
-    "_nota": "DATOS PROVISORIOS inventados para probar el diseño. Confirmar fecha, hora, nombre, redes y formulario antes de publicar.",
-    "nombre": "Así te engañan: la muestra",
-    "descripcion": "Una muestra para ver cómo se construyeron las noticias falsas que marcaron a tres generaciones, y para aprender a no caer en la próxima.",
-    "fecha": "Sábado 21 de noviembre de 2026",
-    "hora": "18 h",
-    "lugar": "Palacio Libertad, Domingo F. Sarmiento",
-    "direccion": "Sarmiento 151, Ciudad de Buenos Aires",
-    "mapaUrl": "https://www.google.com/maps/search/?api=1&query=Palacio+Libertad+Sarmiento+151+Buenos+Aires",
+    "_nota": "Datos de la landing del evento (desinfo-landing-desinfo-web.vercel.app). Sin links a propósito (web del evento, mapa e Instagram). El newsletter sigue simulado.",
+    "nombre": "DESINFO",
+    "descripcion": "Durante tres días el Palacio Libertad se convierte en una sala de evidencia: vas a ver cómo se fabrica una mentira, quién la escribe y por qué la compartís sin pensarlo. Entrada libre y gratuita.",
+    "fecha": "Jueves 28 a sábado 30 de octubre de 2027",
+    "hora": "14 a 20 h",
+    "lugar": "Palacio Libertad (ex CCK)",
+    "direccion": "Sarmiento 151, CABA · Subte B (L. N. Alem) y E (Correo Central)",
+    "mapaUrl": "",
     "redes": [
       {
         "nombre": "Instagram",
-        "url": "TODO"
-      },
-      {
-        "nombre": "TikTok",
         "url": "TODO"
       }
     ],
@@ -83,6 +79,51 @@
         ],
         "scale": 1
       }
+    },
+    {
+      "videoOriginal": "",
+      "subtitulosOriginal": "",
+      "fuenteOriginal": "",
+      "notaOriginal": "",
+      "uvRepeat": [
+        1,
+        1
+      ],
+      "uvOffset": [
+        0,
+        0
+      ],
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "id": "vietnam",
+      "nombre": "Vietnam",
+      "epoca": "Abuelos",
+      "anio": "1964",
+      "titulo": "El incidente del Golfo de Tonkín",
+      "tecnica": "Falsa urgencia",
+      "ficha": "Mezcla un hecho cierto (hubo un incidente en el Golfo de Tonkín) con una acusación que nadie puede comprobar: \"fuentes cercanas al mando\". Empieza con una interrupción urgente para que no pienses, mete la sospecha y termina empujándote a compartir \"antes de que lo censuren\". La prisa te saca el tiempo de chequear.",
+      "falso": "Que el ataque naval fue un plan armado de antemano para justificar el envío de tropas y aprobar el presupuesto militar.",
+      "real": "El 2 de agosto de 1964, lanchas torpederas norvietnamitas atacaron al destructor estadounidense USS Maddox en el Golfo de Tonkín. El 4 de agosto se informó de un segundo ataque, pero hoy se sabe que no ocurrió: fueron lecturas erróneas de radares y sonares con mal tiempo. Aun así, el gobierno de Estados Unidos lo presentó con más certeza de la que había y el Congreso aprobó la Resolución del Golfo de Tonkín, que habilitó la escalada de la guerra de Vietnam. Hubo información mal evaluada y mal contada, pero ninguna investigación probó que todo fuera un plan armado de antemano.",
+      "tip": "Si algo te apura a compartir, es la señal para frenar. Cuando solo cita \"fuentes cercanas\" sin nombre ni documento, buscá si algún medio o archivo confiable lo confirma antes de pasarlo.",
+      "modelo": "models/vietnam.glb",
+      "video": "videos/vietnam.mp4",
+      "subtitulos": "subs/vietnam.vtt",
+      "soloAudio": true,
+      "aspectoPantalla": 1.778,
+      "targets": [
+        4
+      ]
     },
     {
       "id": "chernobil",
@@ -215,6 +256,50 @@
         ],
         "scale": 1
       }
+    },
+    {
+      "videoOriginal": "",
+      "subtitulosOriginal": "",
+      "fuenteOriginal": "",
+      "notaOriginal": "",
+      "uvRepeat": [
+        1.116,
+        1.183
+      ],
+      "uvOffset": [
+        -0.058,
+        -0.0876
+      ],
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": 1
+      },
+      "id": "artemis",
+      "nombre": "Artemis",
+      "epoca": "Vos",
+      "anio": "2026",
+      "titulo": "El regreso de la misión Artemis II",
+      "tecnica": "Teoría conspirativa",
+      "ficha": "Parte de algo real (la reentrada de Orion era el momento más delicado de la misión) y le agrega un culpable invisible: una agencia que \"ocultó\" un fallo y \"retrasó\" la señal para editar las imágenes. Como no se puede probar que no escondieron nada, la duda queda dando vueltas. Y cierra con \"juzgá vos mismo\", para que parezca que llegaste solo a esa conclusión.",
+      "falso": "Que la misión lunar ocultó un fallo grave en el escudo térmico durante el regreso, y que la agencia retrasó la señal en vivo para editar las imágenes y evitar recortes presupuestarios.",
+      "real": "Artemis II despegó el 1 de abril de 2026 y amerizó el 10 de abril, después de rodear la Luna con cuatro astronautas. El escudo térmico de la cápsula Orion preocupaba desde Artemis I (2022), cuando el material se había desgastado más de lo esperado. Esta vez la NASA cambió la trayectoria de reentrada, publicó fotos y datos del escudo, y concluyó que se comportó como lo previsto, con mucho menos desgaste que en Artemis I. Hubo debate real: un ex astronauta criticó el cambio de trayectoria. Pero no hay pruebas de que se haya ocultado un fallo ni de que se haya demorado o editado la transmisión.",
+      "tip": "Que una duda sea razonable no prueba que haya un encubrimiento. Buscá el informe de la agencia y la opinión de especialistas independientes: si las dos cosas existen y se pueden consultar, \"nos ocultaron todo\" ya no cierra.",
+      "modelo": "models/artemis.glb",
+      "video": "videos/artemis.mp4",
+      "subtitulos": "subs/artemis.vtt",
+      "aspectoPantalla": 1.778,
+      "targets": [
+        5
+      ]
     }
   ]
 }

@@ -15,11 +15,11 @@ for (const n of noticias) {
   archivos[n.targets[0]] = `afiches/${n.id}.jpg`;
   ids[n.targets[0]] = n.id;
 }
-// Chernobil y AMIA comparten el título "ASÍ ENGAÑARON A TUS PADRES" (las mismas letras de collage)
+// Vietnam (como Kennedy) y Artemis (como 11-S) también repiten título. Chernobil y AMIA comparten el título "ASÍ ENGAÑARON A TUS PADRES" (las mismas letras de collage)
 // y la cámara podía confundirlos. Para compilar, en esos dos se difumina la franja del título
 // (proporción del alto del afiche) y el reconocimiento se apoya en la foto de cada uno.
 // El afiche impreso no cambia. Si se rediseñan los afiches, hay que volver a medir estas franjas.
-const FRANJAS = { chernobil: [0.2, 0.64], amia: [0.11, 0.6] };
+const FRANJAS = { chernobil: [0.2, 0.64], amia: [0.11, 0.6], vietnam: [0.17, 0.66], artemis: [0.19, 0.6] };
 async function paraCompilar(archivo, id) {
   const img = await loadImage(archivo);
   const c = createCanvas(img.width, img.height);

@@ -116,7 +116,7 @@ export async function iniciarAR(contenedor: HTMLElement, video: HTMLVideoElement
       const cambiar = (x: THREE.Material) => (x.name === 'pantalla' ? (hayPantalla = true, mat) : x);
       m.material = Array.isArray(m.material) ? m.material.map(cambiar) : cambiar(m.material);
     });
-    if (!hayPantalla) console.warn(`El GLB de "${noticia.id}" no tiene un material llamado "pantalla".`);
+    if (!hayPantalla && !noticia.soloAudio) console.warn(`El GLB de "${noticia.id}" no tiene un material llamado "pantalla".`);
 
     const caja = new THREE.Box3().setFromObject(modelo);
     const tam = caja.getSize(new THREE.Vector3());

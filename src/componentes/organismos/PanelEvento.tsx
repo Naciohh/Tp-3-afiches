@@ -37,7 +37,7 @@ export function PanelEvento({ abierto }: { abierto: boolean }) {
           <Newsletter texto={evento.newsletter.texto} simulado={evento.newsletter.simulado} url={evento.newsletter.url} />
         </>
       ) : (
-        <p className="t-rotulo-fino">Se desbloquea cuando encontrás los cuatro teles.</p>
+        <p className="t-rotulo-fino">Se desbloquea cuando encontrás todos los afiches.</p>
       )}
     </article>
   );

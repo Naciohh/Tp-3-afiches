@@ -24,6 +24,8 @@ export type Noticia = {
   uvRepeat?: number[];
   uvOffset?: number[];
   aspectoPantalla?: number;
+  /** Sin pantalla en el modelo (una radio): solo suena el audio. */
+  soloAudio?: boolean;
 };
 
 export type Evento = typeof datos.evento;

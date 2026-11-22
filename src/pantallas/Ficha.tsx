@@ -33,7 +33,7 @@ export function Ficha({ noticia, onChequear, onVolver }: Props) {
       <BloqueFicha tipo="Falso" etiqueta="Lo que decía el video">{noticia.falso}</BloqueFicha>
       <BloqueFicha tipo="Real" etiqueta="Lo que pasó de verdad">{noticia.real}</BloqueFicha>
       <BloqueFicha tipo="Neutro" etiqueta="Cómo te engañó" titulo={noticia.tecnica}>{noticia.ficha}</BloqueFicha>
-      <NoticiaOriginal noticia={noticia} />
+      {noticia.videoOriginal && <NoticiaOriginal noticia={noticia} />}
       <BloqueFicha tipo="Consejo" etiqueta="Para no caer">{noticia.tip}</BloqueFicha>
       <Boton tipo="Secundario" etiqueta="Cómo chequear una noticia" onClick={onChequear} />
       <Boton etiqueta="Volver" onClick={onVolver} />
