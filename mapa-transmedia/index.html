@@ -400,9 +400,18 @@ const E=[
 ];
 
 
+/* ESPACIADO */
+/* Se separan los nodos (cajas y personas) para que las etiquetas de las flechas tengan lugar y no se pisen.
+   Los tamaños de los nodos no cambian: solo la distancia entre ellos y la curvatura de las flechas. */
+const K=1.5;
+Object.keys(N).forEach(k=>{N[k].x*=K;N[k].y*=K;});
+Object.keys(PN).forEach(k=>{PN[k].x*=K;PN[k].y*=K;});
+E.forEach(e=>{ if(e.bow)e.bow*=K; if(e.lx!==undefined){e.lx*=K;e.ly*=K;} });
+/* FIN ESPACIADO */
+
 /* ===================== geometría ===================== */
 const SVGNS="http://www.w3.org/2000/svg";
-const W=3960,H=2470;
+const W=Math.round(3960*K),H=Math.round(2470*K);
 function el(n,at){const e=document.createElementNS(SVGNS,n);for(const k in at)if(at[k]!==null&&at[k]!==undefined)e.setAttribute(k,at[k]);return e;}
 function center(id){ return PN[id]?[PN[id].x,PN[id].y]:[N[id].x,N[id].y]; }
 
@@ -512,6 +521,12 @@ const GLYPH={
 };
 
 /* ===================== dibujo ===================== */
+/* AUTOFIT */
+const BB=(function(){let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  Object.values(N).forEach(n=>{const hw=n.r||n.w/2,hh=n.r||n.h/2;x0=Math.min(x0,n.x-hw);x1=Math.max(x1,n.x+hw);y0=Math.min(y0,n.y-hh);y1=Math.max(y1,n.y+hh);});
+  Object.values(PN).forEach(p=>{x0=Math.min(x0,p.x-PR-120);x1=Math.max(x1,p.x+PR+120);y0=Math.min(y0,p.y-PR-40);y1=Math.max(y1,p.y+PR+130);});
+  return {x:x0-140,y:y0-120,w:(x1-x0)+280,h:(y1-y0)+240};})();
+/* FIN AUTOFIT */
 const svg=document.getElementById("map");
 svg.setAttribute("viewBox","0 0 "+W+" "+H);
 svg.setAttribute("preserveAspectRatio","xMidYMid meet");
@@ -543,7 +558,7 @@ E.forEach(e=>{
   const ly=lyBase-(e.t.length-1)*10;
   const txt=el("text",{x:lx,y:ly,class:"elabel","text-anchor":e.la||"middle"});
   txt.style.fill="var(--c-"+e.p+")";
-  e.t.forEach((ln,k)=>{const ts=el("tspan",{x:lx,dy:k===0?0:20});ts.textContent=ln;txt.appendChild(ts);});
+  e.t.forEach((ln,k)=>{const ts=el("tspan",{x:lx,dy:k===0?0:"1.2em"});ts.textContent=ln;txt.appendChild(ts);});
   gLabels.appendChild(txt);
 
   edgeEls.push({g:g,txt:txt,p:e.p,nodes:[e.a,e.b],anchorPt:[lx,lyBase],spec:e});
@@ -662,33 +677,45 @@ function decollide(){
   edgeEls.forEach(e=>e.txt.removeAttribute("transform"));
   const obstacles=[];
   gNodes.querySelectorAll("g.node").forEach(g=>{
-    const r=g.querySelector("rect.nbox"); if(r)obstacles.push(bbox(r,12,12));
-    const c=g.querySelector("circle"); if(c)obstacles.push(bbox(c,12,12));
-    g.querySelectorAll("text.pname,text.prole,text.badge-t,text.stagetag,text.nmeta").forEach(t=>obstacles.push(bbox(t,6,4)));
+    const r=g.querySelector("rect.nbox"); if(r)obstacles.push(bbox(r,26,22));
+    const c=g.querySelector("circle"); if(c)obstacles.push(bbox(c,26,22));
+    g.querySelectorAll("text.pname,text.prole,text.badge-t,text.stagetag,text.nmeta").forEach(t=>obstacles.push(bbox(t,12,8)));
   });
-  gGuide.querySelectorAll("text").forEach(t=>obstacles.push(bbox(t,6,4)));
+  gGuide.querySelectorAll("text").forEach(t=>obstacles.push(bbox(t,12,8)));
 
-  const CAND=[[0,0],[0,-28],[0,28],[0,-56],[0,56],[-48,0],[48,0],[-48,-34],[48,-34],[-48,34],[48,34],
-              [0,-88],[0,88],[-100,0],[100,0],[-100,-48],[100,-48],[-100,48],[100,48],[0,-124],[0,124],
-              [-160,0],[160,0],[-160,-70],[160,-70],[-160,70],[160,70],[0,-170],[0,170],
-              [-230,0],[230,0],[-230,-110],[230,-110],[-230,110],[230,110],[0,-220],[0,220]];
+  /* candidatos: anillos de radio creciente alrededor de la posición ideal, en 16 direcciones.
+     Se prueba de adentro hacia afuera y se queda con el primero que no pisa nada. */
+  const CAND=[[0,0]];
+  const DIRS=[];
+  for(let k=0;k<16;k++){const a=k*Math.PI/8; DIRS.push([Math.cos(a),Math.sin(a)]);}
+  for(let r=26;r<=520;r+=26){
+    DIRS.forEach(d=>CAND.push([Math.round(d[0]*r*1.35),Math.round(d[1]*r)]));
+  }
+  const fsz=parseFloat(getComputedStyle(edgeEls[0].txt).fontSize)||20, esc=Math.max(1,fsz/20*0.95);
+  const GAPX=44*esc,GAPY=26*esc;   /* aire mínimo entre etiquetas (crece con el tamaño del texto) */
   const placed=[];
-  edgeEls.forEach(e=>{
-    const base=bbox(e.txt,5,4); if(!base)return;
-    let best=[0,0];
+  /* primero las etiquetas más largas: son las más difíciles de ubicar */
+  const order=edgeEls.filter(e=>!e.txt.classList.contains("faded")).map((e,i)=>({e:e,b:bbox(e.txt,0,0)})).filter(o=>o.b).sort((a,b)=>b.b.w*b.b.h-a.b.w*a.b.h);
+  order.forEach(({e,b:raw})=>{
+    const base=bbox(e.txt,5,4);
+    let best=null,fallback=[0,0],fbScore=Infinity;
     for(const c of CAND){
       const t={x:base.x+c[0],y:base.y+c[1],w:base.w,h:base.h};
       if(t.x<8||t.x+t.w>W-8||t.y<20||t.y+t.h>H-8)continue;
-      let clash=false;
-      for(const o of obstacles) if(hitBox(t,o)){clash=true;break;}
-      if(!clash) for(const o of placed) if(hitBox(t,o)){clash=true;break;}
+      const tp={x:t.x-GAPX/2,y:t.y-GAPY/2,w:t.w+GAPX,h:t.h+GAPY};
+      let clash=0;
+      for(const o of obstacles) if(hitBox(tp,o)) clash++;
+      for(const o of placed) if(hitBox(tp,o)) clash++;
       if(!clash){best=c;break;}
+      const score=clash*1000+Math.hypot(c[0],c[1]);
+      if(score<fbScore){fbScore=score;fallback=c;}
     }
-    if(best[0]||best[1]) e.txt.setAttribute("transform","translate("+best[0]+","+best[1]+")");
-    placed.push({x:base.x+best[0],y:base.y+best[1],w:base.w,h:base.h});
-    if(Math.abs(best[0])>48||Math.abs(best[1])>56){
+    const c=best||fallback;
+    if(c[0]||c[1]) e.txt.setAttribute("transform","translate("+c[0]+","+c[1]+")");
+    placed.push({x:base.x+c[0],y:base.y+c[1],w:base.w,h:base.h});
+    if(Math.abs(c[0])>60||Math.abs(c[1])>60){
       const l=el("line",{x1:e.anchorPt[0],y1:e.anchorPt[1]-5,
-                         x2:e.anchorPt[0]+best[0],y2:e.anchorPt[1]+best[1]-5,class:"leader"});
+                         x2:e.anchorPt[0]+c[0],y2:e.anchorPt[1]+c[1]-5,class:"leader"});
       l.style.stroke="var(--c-"+e.p+")"; gLeaders.appendChild(l);
     }
   });
@@ -719,7 +746,8 @@ function refresh(){
     g.classList.toggle("faded",!on);
   });
   document.getElementById("clearBtn").hidden=!(anyP||focusNode);
-  updateLabels(); renderJourney();
+  updateLabels(); renderJourney(); autoFit(live,anyP,focusNode);
+  document.documentElement.dataset.focus=(anyP||focusNode)?"on":"off"; setTimeout(decollide,40);
 }
 
 let labelsMode="auto";
@@ -727,7 +755,7 @@ function scaleNow(){const r=svg.getBoundingClientRect();return r.width/vb.w;}
 function updateLabels(){
   const s=scaleNow();
   const show = labelsMode==="always" ? true : labelsMode==="never" ? false
-             : (s>=0.5||active.size>0||!!focusNode);
+             : (s>=0.5/K||active.size>0||!!focusNode);
   gLabels.classList.toggle("off",!show);
   gLeaders.style.opacity=show?"":"0";
   const h=document.getElementById("hint");
@@ -793,9 +821,28 @@ function renderJourney(){
 }
 
 /* ===================== zoom / pan ===================== */
-let vb={x:-20,y:0,w:W+40,h:H};
+function autoFit(live,anyP,focus){
+  if(!(anyP||focus)){fit();return;}
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  live.forEach(id=>{
+    const c=center(id), n=N[id];
+    const hw=PN[id]?PR+30:(n.r||n.w/2), hh=PN[id]?PR+90:(n.r||n.h/2);
+    x0=Math.min(x0,c[0]-hw);x1=Math.max(x1,c[0]+hw);y0=Math.min(y0,c[1]-hh);y1=Math.max(y1,c[1]+hh);
+  });
+  if(x0>x1)return;
+  const r=svg.getBoundingClientRect(), pad=190, ratio=r.width/r.height;
+  const jpx=(active.size===1)?Math.min(390,innerWidth*.94):0;
+  const w=(x1-x0)+2*pad, h=(y1-y0)+2*pad;
+  let vw=Math.max(w,h*ratio), upp=vw/(r.width||1);
+  vw=Math.max(w+jpx*upp,h*ratio); upp=vw/(r.width||1);
+  const vh=vw/ratio;
+  vb={x:x0-pad-jpx*upp,y:(y0+y1)/2-vh/2,w:vw,h:vh}; setVB();
+}
+
+
+let vb={x:BB.x,y:BB.y,w:BB.w,h:BB.h};
 function setVB(){svg.setAttribute("viewBox",vb.x+" "+vb.y+" "+vb.w+" "+vb.h);updateLabels();}
-function fit(){vb={x:-20,y:0,w:W+40,h:H};setVB();}
+function fit(){vb={x:BB.x,y:BB.y,w:BB.w,h:BB.h};setVB();}
 function zoom(f,cx,cy){
   const nw=Math.min(W*1.4,Math.max(W*0.14,vb.w*f)),k=nw/vb.w;
   if(cx===undefined){cx=vb.x+vb.w/2;cy=vb.y+vb.h/2;}
