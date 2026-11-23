@@ -74,6 +74,10 @@ button:hover{background:var(--surface-2);border-color:var(--text-faint)}
 button:focus-visible{outline:2px solid var(--naranja);outline-offset:2px}
 .btn-a11y{border-color:var(--naranja);color:var(--naranja);font-weight:600;display:flex;align-items:center;gap:7px}
 .btn-a11y[aria-expanded="true"]{background:var(--naranja);color:#0A0A0A}
+.vers{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden;margin-right:2px}
+.vers a,.vers span{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:8px 11px;text-decoration:none}
+.vers a{color:var(--text-dim)}.vers a:hover{background:var(--surface-2);color:var(--text)}
+.vers span{background:var(--naranja);color:#0A0A0A;font-weight:600}
 .zoomgrp{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden}
 .zoomgrp button{border:0;border-radius:0;border-left:1px solid var(--line);min-width:38px}
 .zoomgrp button:first-child{border-left:0}
@@ -190,6 +194,7 @@ g.node{cursor:pointer}
     <p class="sub">El evento en el centro, las piezas de la campaña orbitando en el orden en que ocurren, y cada persona entrando por su propio canal. Cuando dos personas usan el mismo canal, convergen en el mismo nodo.</p>
   </div>
   <div class="controls">
+    <nav class="vers" aria-label="Versión del mapa"><a href="nueva-identidad/">Identidad nueva</a><span aria-current="page">Versión anterior</span></nav>
     <button class="btn-a11y" id="a11yBtn" aria-expanded="false">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/></svg>
       Accesibilidad
