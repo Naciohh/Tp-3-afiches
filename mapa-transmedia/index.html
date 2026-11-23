@@ -400,6 +400,7 @@ const E=[
 ];
 
 
+
 /* ESPACIADO */
 /* Se separan los nodos (cajas y personas) para que las etiquetas de las flechas tengan lugar y no se pisen.
    Los tamaños de los nodos no cambian: solo la distancia entre ellos y la curvatura de las flechas. */
@@ -688,7 +689,7 @@ function decollide(){
   const CAND=[[0,0]];
   const DIRS=[];
   for(let k=0;k<16;k++){const a=k*Math.PI/8; DIRS.push([Math.cos(a),Math.sin(a)]);}
-  for(let r=26;r<=520;r+=26){
+  for(let r=26;r<=900;r+=26){
     DIRS.forEach(d=>CAND.push([Math.round(d[0]*r*1.35),Math.round(d[1]*r)]));
   }
   const fsz=parseFloat(getComputedStyle(edgeEls[0].txt).fontSize)||20, esc=Math.max(1,fsz/20*0.95);
@@ -747,6 +748,7 @@ function refresh(){
   });
   document.getElementById("clearBtn").hidden=!(anyP||focusNode);
   updateLabels(); renderJourney(); autoFit(live,anyP,focusNode);
+  document.documentElement.dataset.focus=(anyP||focusNode)?"on":"off"; setTimeout(decollide,40); autoFit(live,anyP,focusNode);
   document.documentElement.dataset.focus=(anyP||focusNode)?"on":"off"; setTimeout(decollide,40);
 }
 
@@ -821,6 +823,25 @@ function renderJourney(){
 }
 
 /* ===================== zoom / pan ===================== */
+function autoFit(live,anyP,focus){
+  if(!(anyP||focus)){fit();return;}
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  live.forEach(id=>{
+    const c=center(id), n=N[id];
+    const hw=PN[id]?PR+30:(n.r||n.w/2), hh=PN[id]?PR+90:(n.r||n.h/2);
+    x0=Math.min(x0,c[0]-hw);x1=Math.max(x1,c[0]+hw);y0=Math.min(y0,c[1]-hh);y1=Math.max(y1,c[1]+hh);
+  });
+  if(x0>x1)return;
+  const r=svg.getBoundingClientRect(), pad=190, ratio=r.width/r.height;
+  const jpx=(active.size===1)?Math.min(390,innerWidth*.94):0;
+  const w=(x1-x0)+2*pad, h=(y1-y0)+2*pad;
+  let vw=Math.max(w,h*ratio), upp=vw/(r.width||1);
+  vw=Math.max(w+jpx*upp,h*ratio); upp=vw/(r.width||1);
+  const vh=vw/ratio;
+  vb={x:x0-pad-jpx*upp,y:(y0+y1)/2-vh/2,w:vw,h:vh}; setVB();
+}
+
+
 function autoFit(live,anyP,focus){
   if(!(anyP||focus)){fit();return;}
   let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
