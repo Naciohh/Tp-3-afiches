@@ -366,7 +366,7 @@ Object.keys(N).forEach(k=>N[k].id=k);
    centrada ópticamente. La altura se deriva del contenido, no al revés. */
 function metrics(n){
   const big=!!n.r;
-  const F=1.35, IC=Math.round((big?36:28)*F), G1=Math.round((big?18:15)*F), LH=Math.round((big?34:24)*F), G2=Math.round((big?16:14)*F), MH=Math.round((big?15:14)*F);
+  const F=1.35, IC=Math.round((big?36:28)*F), G1=Math.round((big?18:15)*F), LH=Math.round((big?34:31)*F), G2=Math.round((big?16:14)*F), MH=Math.round((big?15:14)*F);
   const TAG=Math.round(15*F), G0=Math.round(13*F);
   const nl=n.l.length, hasMeta=!!n.meta, hasTag=!!(n.tag||n.t==="emergente"), hasIcon=!!(n.g&&n.g.length);
   const blockH=(hasTag?TAG+G0:0)+(hasIcon?IC+G1:0)+nl*LH+(hasMeta?G2+MH:0);
@@ -464,6 +464,7 @@ const E=[
 /* ---------------- la campaña circulando sola ---------------- */
 {p:"N",s:0,a:"afiche",b:"redes",bow:-180,t:["Circulan videos y capturas","de los teles en los afiches"]}
 ];
+
 
 
 
@@ -824,6 +825,7 @@ function refresh(){
   document.getElementById("clearBtn").hidden=!(anyP||focusNode);
   updateLabels(); renderJourney(); autoFit(live,anyP,focusNode);
   document.documentElement.dataset.focus=(anyP||focusNode)?"on":"off"; setTimeout(decollide,40); autoFit(live,anyP,focusNode);
+  document.documentElement.dataset.focus=(anyP||focusNode)?"on":"off"; setTimeout(decollide,40); autoFit(live,anyP,focusNode);
   document.documentElement.dataset.focus=(anyP||focusNode)?"on":"off"; setTimeout(decollide,40);
 }
 
@@ -832,7 +834,7 @@ function scaleNow(){const r=svg.getBoundingClientRect();return r.width/vb.w;}
 function updateLabels(){
   const s=scaleNow();
   const show = labelsMode==="always" ? true : labelsMode==="never" ? false
-             : (s>=0.5/K||active.size>0||!!focusNode);
+             : (s>=1.6*svg.getBoundingClientRect().width/BB.w||active.size>0||!!focusNode);
   gLabels.classList.toggle("off",!show);
   gLeaders.style.opacity=show?"":"0";
   const h=document.getElementById("hint");
@@ -898,6 +900,25 @@ function renderJourney(){
 }
 
 /* ===================== zoom / pan ===================== */
+function autoFit(live,anyP,focus){
+  if(!(anyP||focus)){fit();return;}
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  live.forEach(id=>{
+    const c=center(id), n=N[id];
+    const hw=PN[id]?PR+30:(n.r||n.w/2), hh=PN[id]?PR+90:(n.r||n.h/2);
+    x0=Math.min(x0,c[0]-hw);x1=Math.max(x1,c[0]+hw);y0=Math.min(y0,c[1]-hh);y1=Math.max(y1,c[1]+hh);
+  });
+  if(x0>x1)return;
+  const r=svg.getBoundingClientRect(), pad=190, ratio=r.width/r.height;
+  const jpx=(active.size===1)?Math.min(390,innerWidth*.94):0;
+  const w=(x1-x0)+2*pad, h=(y1-y0)+2*pad;
+  let vw=Math.max(w,h*ratio), upp=vw/(r.width||1);
+  vw=Math.max(w+jpx*upp,h*ratio); upp=vw/(r.width||1);
+  const vh=vw/ratio;
+  vb={x:x0-pad-jpx*upp,y:(y0+y1)/2-vh/2,w:vw,h:vh}; setVB();
+}
+
+
 function autoFit(live,anyP,focus){
   if(!(anyP||focus)){fit();return;}
   let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
@@ -1041,7 +1062,7 @@ updateLabels();
   window.__rel=function(){
     const r=svg.getBoundingClientRect(), vw=svg.viewBox.baseVal.width; if(!r.width||!vw)return;
     const sc=r.width/vw, foc=document.documentElement.dataset.focus==="on", big=document.documentElement.dataset.bigtext==="on";
-    const px=(foc?12.5:(innerWidth<700?9.5:10.5))*(big?1.2:1);
+    const zoomed=sc>=1.5*r.width/BB.w; const px=((foc||zoomed)?12.5:(innerWidth<700?9.5:10.5))*(big?1.2:1);
     document.documentElement.style.setProperty("--fs-label",(px/sc/(foc?2.4:1)).toFixed(2)+"px");
     decollide();
   };
